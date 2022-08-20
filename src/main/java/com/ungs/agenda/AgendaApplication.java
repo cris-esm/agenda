@@ -35,7 +35,7 @@ public class AgendaApplication implements CommandLineRunner {
 		//personaRepo.findAll().forEach(persona -> System.out.println(persona));
 		//System.out.println(personaRepo.findAll());
 		//domicilioRepo.findAll().forEach(domicilio -> System.out.println(domicilio));
-		System.out.println(personaRepo.findAll().get(0).getDomicilio().getLocalidad().getProvincia().getPais());
+		System.out.println(personaRepo.findAll().get(0).getTipoContacto());
 		//localidadRepo.findAll().forEach(loc -> System.out.println(loc));
 		//provinciaRepo.findAll().forEach(prov -> System.out.println(prov));
 	}
