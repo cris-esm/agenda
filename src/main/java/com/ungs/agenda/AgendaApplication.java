@@ -20,7 +20,6 @@ public class AgendaApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		personaRepo.findAll().forEach(persona -> System.out.println(persona));
-		
 	}
 
 }
