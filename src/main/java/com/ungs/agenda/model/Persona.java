@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -43,4 +44,12 @@ public class Persona {
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "iddomicilio", referencedColumnName = "id")
 	private Domicilio domicilio;
+
+	
+	@ToString.Exclude
+	@EqualsAndHashCode.Exclude
+    @ManyToOne
+    @JoinColumn(name="idtipocontacto")
+	private TipoContacto tipoContacto;
+
 }
