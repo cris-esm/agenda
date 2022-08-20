@@ -8,7 +8,7 @@
 	<!-- Bootstrap CSS -->
 
 	<link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}">
-	<link href="../static/css/index.css" rel="stylesheet" th:href="@{/css/index.css}" />
+	<link th:href="@{/css/index.css}" rel="stylesheet" />
 
 	<link href="https://unpkg.com/nes.css@2.2.0/css/nes.min.css" rel="stylesheet" />
 	<!-- último -->
@@ -18,33 +18,15 @@
 
 </head>
 
-<body>
-
-<div class="container">
-	<section style="position:relative;left: 27%;">
-		<section class="message-list">
-			<section class="message -left">
-				<i class="snes-jp-logo"></i>
-				<!-- Balloon -->
-				<div class="nes-balloon from-left">
-					<p>Bienvenido a la agenda</p>
-				</div>
-				<i class="nes-pokeball" style="position: relative;top:30px"></i>
-			</section>
-		</section>
-	</section>
-
-
-
-	<br><br><br><br>
+<body style="background-image:url(../static/img/mario.jpg) no-repeat center center fixed;">
 	<div class="container">
-		<div style="position: relative;top:100px;left: 28%;">
-			<i class="nes-charmander" style="position: relative;top:20px"></i>
-			<a type="button" class="nes-btn is-warning" th:href="@{/agregar}">Agregar Persona</a>
-			<i class="nes-mario"  style="position: relative;top:20px"></i>
-		</div>
 
-		<div style="position: relative;left: 17%;top:50px;width: 800px;top:100px;">
+		<a a class="btn btn-secondary" th:href="@{/agregar}" style="position: relative;left:47%;top:112px;">Agregar
+			Persona</a>
+
+
+
+		<div style="position: relative;left: 30%;top:50px;width: 500px;">
 			<div class="nes-table-responsive">
 				<table class="nes-table is-bordered is-centered">
 					<thead>
@@ -73,9 +55,6 @@
 				</table>
 			</div>
 		</div>
-
-</div>
-
 
 </body>
 
