@@ -1,5 +1,7 @@
 package com.ungs.agenda.model;
 
+import java.time.LocalDate;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,6 +33,9 @@ public class Persona {
 	
 	@Column
 	private String email;
+	
+	@Column(name="fechanac")
+	private LocalDate fechaNac;
 	
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
