@@ -7,14 +7,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.ungs.agenda.model.Persona;
 import com.ungs.agenda.repository.DomicilioRepository;
+import com.ungs.agenda.repository.LocalidadRepository;
 import com.ungs.agenda.repository.PersonaRepository;
+import com.ungs.agenda.repository.ProvinciaRepository;
 import com.ungs.agenda.service.IPersonaService;
 
 @SpringBootApplication
 public class AgendaApplication implements CommandLineRunner {
-	
-	@Autowired
-	IPersonaService personaService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(AgendaApplication.class, args);
@@ -25,12 +24,20 @@ public class AgendaApplication implements CommandLineRunner {
 	
 	@Autowired
 	private DomicilioRepository domicilioRepo;
-
+	
+	@Autowired 
+	private ProvinciaRepository provinciaRepo;
+	
+	@Autowired
+	private LocalidadRepository localidadRepo;
 	@Override
 	public void run(String... args) throws Exception {
 		//personaRepo.findAll().forEach(persona -> System.out.println(persona));
-		System.out.println(personaRepo.findAll());
-		domicilioRepo.findAll().forEach(domicilio -> System.out.println(domicilio));
+		//System.out.println(personaRepo.findAll());
+		//domicilioRepo.findAll().forEach(domicilio -> System.out.println(domicilio));
+		
+		localidadRepo.findAll().forEach(loc -> System.out.println(loc));
+		//provinciaRepo.findAll().forEach(prov -> System.out.println(prov));
 	}
 
 }
