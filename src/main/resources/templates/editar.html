@@ -1,57 +1,72 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="ISO-8859-1">
-<title>Personas</title>
+	<meta charset="ISO-8859-1">
+	<title>Personas</title>
 
-<!-- Bootstrap CSS -->
-<link href="../static/css/bootstrap.css" rel="stylesheet"
-	th:href="@{/css/bootstrap.css}">
+	<!-- Bootstrap CSS -->
+	<link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}">
 
 
+	<!-- Bootstrap CSS -->
+
+	<link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}">
+	<link th:href="@{/css/index.css}" rel="stylesheet" />
+
+	<link href="https://unpkg.com/nes.css@2.2.0/css/nes.min.css" rel="stylesheet" />
+	<!-- último -->
+	<link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
+	<!-- solo estilo del núcleo -->
+	<link href="https://unpkg.com/nes.css/css/nes-core.min.css" rel="stylesheet" />
 
 </head>
-<body>
 
-    <body>
-	<div class="container">
-		
-						<p class="btn btn-primary" style="position: relative;left:47%;top:112px;">Agregar Persona</p>
+<body style="background-image:url(../static/img/mario.jpg) no-repeat center center fixed;">
 
-		
-		<div style="position: relative;left:30%;">
 
-		<table class="table table-striped " style="background-color: azure;width: 600px;">
-			<thead>
-				<tr>
-					<th scope="col">Nombre</th>
-					<th scope="col">Telefono</th>
-					<th scope="col">Email</th>
-					<th scope="col">sin valor</th>
-					<th scope="col">Acciones</th>
-				</tr>
-			</thead>
-			<tr th:each="persona : ${list}">
-				<td><span th:text="${persona.nombre}"> Nombre </span></td>
-				<br>
-				<td><span th:text="${persona.telefono}"> Telefono </span></td>
-				<br>
-				<td><span th:text="${persona.email}"> Email </span></td>
-				<br>
-				<td><span th:text="${persona.telefono}"> Telefono </span></td>
-				<br>
-				<td><a class="btn btn-danger"> eliminar </a>
-				<a class="btn btn-secondary" th:href="@{/editar}"> editar </a></td>
-
-			</tr>
-
-		</table>
-	</div>
+	<body>
+		<div class="container">
 
 
 
+			<div style="position: relative;left:15%;">
+
+				<table class="table table-striped " style="background-color: azure;width: 600px;">
+					<thead>
+						<tr>
+							<th scope="col">Nombre</th>
+							<th scope="col">Telefono</th>
+							<th scope="col">Email</th>
+							<th scope="col">sin valor</th>
+							<th scope="col">Acciones</th>
+						</tr>
+					</thead>
+					<tr th:each="persona : ${list}">
+						<td><span th:text="${persona.nombre}"> Nombre </span></td>
+						<br>
+						<td><span th:text="${persona.telefono}"> Telefono </span></td>
+						<br>
+						<td><span th:text="${persona.email}"> Email </span></td>
+						<br>
+						<td><span th:text="${persona.telefono}"> Telefono </span></td>
+						<br>
+						<td><a type="button" class="nes-btn is-success"> Confirmar </a>
+							
+						</td>
+
+					</tr>
+
+				</table>
+			</div>
+			
+			<div style="text-align: center;">
+			<a class="btn btn-primary" th:href="@{/}" style="position: relative;top:112px;left: 3%;">Volver</a>
+			</div>
+
+
+	</body>
 
 </body>
 
-</body>
 </html>

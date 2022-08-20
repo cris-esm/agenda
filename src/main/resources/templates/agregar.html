@@ -19,40 +19,87 @@
 </head>
 
 <body style="background-image:url(../static/img/mario.jpg) no-repeat center center fixed;">
-	<div class="container">
-
-		<a a class="btn btn-secondary" th:href="@{/agregar}" style="position: relative;left:47%;top:112px;">Agregar
-			Persona</a>
+	<div class="container" style="text-align: center;">
 
 
-
-		<div style="position: relative;left: 30%;top:50px;width: 500px;">
-			<div class="nes-table-responsive">
-				<table class="nes-table is-bordered is-centered">
-					<thead>
-						<tr>
-							<th>Nombre</th>
-							<th>Telefono</th>
-							<th>Email</th>
-							<th>sin valor</th>
-							<th>Acciones</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="persona : ${list}">
-							<td><span th:text="${persona.nombre}"> Nombre </span></td>
-							<td><span th:text="${persona.telefono}"> Telefono </span></td>
-							<td><span th:text="${persona.email}"> Email </span></td>
-							<td><span th:text="${persona.telefono}"> Telefono </span></td>
-							<td> <a type="button" th:href="@{/eliminar/} + ${persona.id}"
-									class="nes-btn is-error">eliminar</a>
-
-								<a th:href="@{/editar}" class="nes-btn is-success">editar</a>
-							</td>
-						</tr>
-
-					</tbody>
-				</table>
+		<br>
+		<div class="container">
+			<div clas="persona" style="width: 300px;display:inline-block;">
+				<div class="nes-field">
+					<label for="name_field" style="color: white;">Nombre</label>
+					<input type="text" id="name_field" class="nes-input">
+				</div>
+				<div class="nes-field">
+					<label for="name_field" style="color: white;">Telefono</label>
+					<input type="text" id="name_field" class="nes-input">
+				</div>
+				<div class="nes-field">
+					<label for="name_field" style="color: white;">Email</label>
+					<input type="text" id="name_field" class="nes-input">
+				</div>
+				<div class="nes-field">
+					<label for="name_field" style="color: white;">Fecha Nacimiento</label>
+					<input type="text" id="name_field" class="nes-input">
+				</div>
+			</div>
+			<div class="datosDom" style="width: 300px;display:inline-block;">
+				<div class="nes-field">
+					<label for="name_field" style="color: white;">Calle</label>
+					<input type="text" id="name_field" class="nes-input">
+				</div>
+				<div class="nes-field">
+					<label for="name_field" style="color: white;">Altura</label>
+					<input type="text" id="name_field" class="nes-input">
+				</div>
+				<div class="nes-field">
+					<label for="name_field" style="color: white;">Piso</label>
+					<input type="text" id="name_field" class="nes-input">
+				</div>
+				<div class="nes-field">
+					<label for="name_field" style="color: white;">Departamento</label>
+					<input type="text" id="name_field" class="nes-input">
+				</div>
+			</div>
+			<div class="domicilio" style="width: 300px;display:inline-block;">
+				<label for="warning_select" style="color: white;">Pais</label>
+				<div class="nes-select is-warning">
+					<select required id="warning_select">
+						<option value="" disabled selected hidden>Select...</option>
+						<option value="0">To be</option>
+						<option value="1">Not to be</option>
+					</select>
+				</div>
+				<label for="warning_select" style="color: white;">Provincia</label>
+				<div class="nes-select is-warning">
+					<select required id="warning_select">
+						<option value="" disabled selected hidden>Select...</option>
+						<option value="0">To be</option>
+						<option value="1">Not to be</option>
+					</select>
+				</div>
+				<label for="warning_select" style="color: white;">Localidad</label>
+				<div class="nes-select is-warning">
+					<select required id="warning_select">
+						<option value="" disabled selected hidden>Select...</option>
+						<option value="0">To be</option>
+						<option value="1">Not to be</option>
+					</select>
+				</div>
+				<label for="warning_select" style="color: white;">Tipo Contacto</label>
+				<div class="nes-select is-warning">
+					<select required id="warning_select">
+						<option value="" disabled selected hidden>Select...</option>
+						<option value="0">To be</option>
+						<option value="1">Not to be</option>
+					</select>
+				</div>
+			</div>
+			<div class="botones" style="position: relative;left: -30%;" >
+			<a class="btn btn-secondary" th:href="@{/agregar}" style="position: relative;left:35%;top:112px;">Agregar
+				Persona</a><br>
+			<div style="position:relative;left: 35%;">
+				<a class="btn btn-primary" th:href="@{/}" style="position: relative;top:112px;">Volver</a>
+			</div>
 			</div>
 		</div>
 
