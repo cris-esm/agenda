@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
-	<meta charset="UTF-8">
-	<title>Personas</title>
+<meta charset="ISO-8859-1">
+<title>Personas</title>
 
-	<!-- Bootstrap CSS -->
+<!-- Bootstrap CSS -->
+<link href="../static/css/bootstrap.css" rel="stylesheet"
+	th:href="@{/css/bootstrap.css}">
 
-	<link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}">
-	<link th:href="@{/css/index.css}" rel="stylesheet" />
+
 
 </head>
-
 <body>
+
+    <body>
 	<div class="container">
 		
 						<p class="btn btn-primary" style="position: relative;left:47%;top:112px;">Agregar Persona</p>
@@ -39,7 +40,7 @@
 				<br>
 				<td><span th:text="${persona.telefono}"> Telefono </span></td>
 				<br>
-				<td><a class="btn btn-danger" th:href="@{/eliminar/} + ${persona.id}"> eliminar </a>
+				<td><a class="btn btn-danger"> eliminar </a>
 				<a class="btn btn-secondary" th:href="@{/editar}"> editar </a></td>
 
 			</tr>
@@ -52,4 +53,5 @@
 
 </body>
 
+</body>
 </html>

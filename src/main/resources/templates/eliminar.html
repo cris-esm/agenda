@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Personas</title>
+
+	<!-- Bootstrap CSS -->
+	<link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}">
+
+
+
+</head>
+
+<body>
+
+	<body>
+		<div class="container">
+
+			<h2 style="text-align: center;">¿ESTA SEGURO QUE DESEA ELIMINAR A LA PERSONA?</h2>
+			<div>
+			<a style="position: relative;left:45%;" class="btn btn-primary" th:href="@{/eliminar/confirmacion/} + ${id}"> SI </a>
+			<a style="position: relative;left:50%;" class="btn btn-danger" th:href="@{/}"> NO </a>
+			</div>
+		</div>
+
+
+
+
+	</body>
+
+</body>
+
+</html>
