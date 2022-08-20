@@ -16,7 +16,6 @@ public class PersonaServiceImpl implements IPersonaService {
 
 	@Override
 	public List<Persona> getPersonas() {
-		// TODO Auto-generated method stub
 		return persona.findAll();
 	}
 
