@@ -1,3 +1,16 @@
+@font-face{
+	src:url(../font/PressStart2P-Regular.ttf);
+	font-family: ner;
+}
+
 body{
-	background-color:#1454c8;
+	background-image :  url(../img/juego.jpg);
+   	font-family:ner ; 
+   	background-size: 100%;
+   	
+   
+ }
+ 
+ span,th,a{
+	font-family:ner ; 
 }

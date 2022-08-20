@@ -29,6 +29,7 @@ public class Persona {
 	@Column
 	private String nombre;
 	
+	
 	@Column
 	private String telefono;
 	
@@ -43,10 +44,12 @@ public class Persona {
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "iddomicilio", referencedColumnName = "id")
 	private Domicilio domicilio;
+
 	
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
     @ManyToOne
     @JoinColumn(name="idtipocontacto")
 	private TipoContacto tipoContacto;
+
 }
