@@ -3,6 +3,8 @@ package com.ungs.agenda.model;
 import javax.persistence.Table;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -37,4 +39,10 @@ public class Domicilio {
 	@EqualsAndHashCode.Exclude
 	@OneToOne(mappedBy = "domicilio")
 	private Persona persona;
+	
+	@ToString.Exclude
+	@EqualsAndHashCode.Exclude
+    @ManyToOne
+    @JoinColumn(name="idlocalidad")
+	private Localidad localidad;
 }

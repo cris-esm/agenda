@@ -37,6 +37,5 @@ public class Persona {
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "iddomicilio", referencedColumnName = "id")
 	private Domicilio domicilio;
-    
-    
+	
 }
