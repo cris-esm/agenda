@@ -65,7 +65,7 @@
 							<td> <a type="button" th:href="@{/eliminar/} + ${persona.id}"
 									class="nes-btn is-error">eliminar</a>
 
-								<a th:href="@{/editar}" class="nes-btn is-success">editar</a>
+								<a th:href="@{/editar/{id}(id=${persona.id})}" class="nes-btn is-success">editar</a>
 							</td>
 						</tr>
 

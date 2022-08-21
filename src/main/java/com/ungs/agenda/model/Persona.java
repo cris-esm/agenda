@@ -51,5 +51,7 @@ public class Persona {
     @ManyToOne
     @JoinColumn(name="idtipocontacto")
 	private TipoContacto tipoContacto;
+	
+	
 
 }
