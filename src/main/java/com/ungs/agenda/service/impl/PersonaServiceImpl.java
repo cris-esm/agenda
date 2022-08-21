@@ -19,4 +19,14 @@ public class PersonaServiceImpl implements IPersonaService {
 		return personaRepo.findAll();
 	}
 
+	@Override
+	public void saveOrUpdate(Persona persona) {
+		personaRepo.save(persona);
+	}
+
+	@Override
+	public void delete(Persona persona) {
+		personaRepo.delete(persona);
+	}
+
 }

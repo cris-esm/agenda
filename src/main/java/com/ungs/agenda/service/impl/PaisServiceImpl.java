@@ -1,7 +1,6 @@
 package com.ungs.agenda.service.impl;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,8 +23,8 @@ public class PaisServiceImpl implements IPaisService {
 
 	@Override
 	public List<Provincia> getProvincias(Long idPais) {
-		Optional<Pais> oPais = Optional.ofNullable(paisRepo.findById(idPais).orElse(new Pais()));
-		return oPais.isPresent() ? oPais.get().getProvincias() : null;
+		Pais pais = paisRepo.getById(idPais);
+		return pais.getProvincias();
 	}
 
 	@Override

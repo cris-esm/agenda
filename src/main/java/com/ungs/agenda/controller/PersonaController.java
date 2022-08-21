@@ -5,15 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ungs.agenda.repository.PersonaRepository;
 import com.ungs.agenda.service.IPersonaService;
 
 @Controller
 @RequestMapping("/")
 public class PersonaController {
-	
-	@Autowired
-	private PersonaRepository personaRepository;
 	
 	@Autowired
 	private IPersonaService personaService;
@@ -27,7 +23,7 @@ public class PersonaController {
 	@RequestMapping("/agregar")
 	public String agregar(Model model) {
 		
-		model.addAttribute("list", personaRepository.findAll());
+		model.addAttribute("list", personaService.getAll());
 		return "agregar";
 	}
 	
@@ -35,7 +31,7 @@ public class PersonaController {
 	@RequestMapping("/editar")
 	public String editar(Model model) {
 		
-		model.addAttribute("list", personaRepository.findAll());
+		model.addAttribute("list", personaService.getAll());
 		return "editar";
 	}
 	

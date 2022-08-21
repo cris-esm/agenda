@@ -19,11 +19,13 @@ public class DomicilioServiceImpl implements IDomicilioService {
 	@Autowired
 	private PersonaRepository personaRepo;
 	
+	@Override
 	public Domicilio getByPersona(Long IdPersona) {
 		Persona persona = personaRepo.getById(IdPersona);
 		return persona.getDomicilio();
 	}
 	
+	@Override
 	public Domicilio getByPersona(Persona persona) {
 		return persona.getDomicilio();
 	}
