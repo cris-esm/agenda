@@ -24,6 +24,13 @@ public class PersonaController {
 		return "index";
 	}
 	
+	@RequestMapping("/agregar")
+	public String agregar(Model model) {
+		
+		model.addAttribute("list", personaRepository.findAll());
+		return "agregar";
+	}
+	
 	
 	@RequestMapping("/editar")
 	public String editar(Model model) {
