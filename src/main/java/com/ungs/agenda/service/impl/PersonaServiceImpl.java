@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ungs.agenda.model.Domicilio;
 import com.ungs.agenda.model.Persona;
 import com.ungs.agenda.repository.PersonaRepository;
 import com.ungs.agenda.service.IPersonaService;
@@ -27,6 +28,17 @@ public class PersonaServiceImpl implements IPersonaService {
 	@Override
 	public void delete(Persona persona) {
 		personaRepo.delete(persona);
+	}
+
+	@Override
+	public Domicilio getDomicilio(Long id) {
+		Persona persona = personaRepo.getById(id);
+		return persona.getDomicilio();
+	}
+
+	@Override
+	public Domicilio getDomicilio(Persona persona) {
+		return persona.getDomicilio();
 	}
 
 }

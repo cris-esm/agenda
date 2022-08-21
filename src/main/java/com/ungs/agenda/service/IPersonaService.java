@@ -2,6 +2,7 @@ package com.ungs.agenda.service;
 
 import java.util.List;
 
+import com.ungs.agenda.model.Domicilio;
 import com.ungs.agenda.model.Persona;
 
 public interface IPersonaService {
@@ -11,4 +12,8 @@ public interface IPersonaService {
 	public void saveOrUpdate(Persona persona);
 	
 	public void delete(Persona persona);
+	
+	public Domicilio getDomicilio(Long id);
+	
+	public Domicilio getDomicilio(Persona persona);
 }
