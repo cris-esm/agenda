@@ -12,11 +12,11 @@ import com.ungs.agenda.service.IPersonaService;
 @Service
 public class PersonaServiceImpl implements IPersonaService {
 	@Autowired
-	private PersonaRepository persona;
+	private PersonaRepository personaRepo;
 
 	@Override
-	public List<Persona> getPersonas() {
-		return persona.findAll();
+	public List<Persona> getAll() {
+		return personaRepo.findAll();
 	}
 
 }

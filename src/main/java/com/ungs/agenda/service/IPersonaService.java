@@ -5,5 +5,5 @@ import java.util.List;
 import com.ungs.agenda.model.Persona;
 
 public interface IPersonaService {
-	public List<Persona> getPersonas();
+	public List<Persona> getAll();
 }
