@@ -29,39 +29,90 @@
 		<div class="container">
 
 
+			<div class="container">
+				<div clas="persona" style="width: 300px;display:inline-block;">
+					<div class="nes-field">
+						<label  for="name_field" style="color: white;">Nombre</label >
+						<input th:value="${persona.nombre}" type="text" id="name_field" class="nes-input">
+					</div>
+					<div class="nes-field">
+						<label for="name_field" style="color: white;">Telefono</label>
+						<input th:value="${persona.telefono}" type="text" id="name_field" class="nes-input">
+					</div>
+					<div class="nes-field">
+						<label for="name_field" style="color: white;">Email</label>
+						<input th:value="${persona.email}"  type="text" id="name_field" class="nes-input">
+					</div>
+					<div class="nes-field">
+						<label for="name_field" style="color: white;">Fecha Nacimiento</label>
+						<input type="text" th:value="${persona.fechaNac}" id="name_field" class="nes-input">
+					</div>
+				</div>
+				<div class="datosDom" style="width: 300px;display:inline-block;">
+					<div class="nes-field">
+						<label for="name_field" style="color: white;">Calle</label>
+						<input  th:value="${persona.domicilio.calle}" type="text" id="name_field" class="nes-input">
+					</div>
+					<div class="nes-field">
+						<label for="name_field" style="color: white;">Altura</label>
+						<input th:value="${persona.domicilio.altura}" type="text" id="name_field" class="nes-input">
+					</div>
+					<div class="nes-field">
+						<label for="name_field" style="color: white;">Piso</label>
+						<input th:value="${persona.domicilio.piso}" type="text" id="name_field" class="nes-input">
+					</div>
+					<div class="nes-field">
+						<label for="name_field" style="color: white;">Departamento</label>
+						<input th:value="${persona.domicilio.departamento}" type="text" id="name_field" class="nes-input">
+					</div>
+				</div>
+				<div class="domicilio" style="width: 300px;display:inline-block;">
+					<label for="warning_select" style="color: white;">Pais</label>
+					<div class="nes-select is-warning">
+						<select required id="warning_select" name="pais">
+							<option  value="" disabled selected hidden>Argentina</option>
+							<option th:each="pais : ${paises}" th:value="${pais.id}" th:text="${pais.nombre}" id="pais">
+							</option>
+						</select>
+					</div>
+					<label for="warning_select" style="color: white;" name="provincia">Provincia</label>
+					<div class="nes-select is-warning">
+						<select required id="warning_select">
+							<option value="" disabled selected hidden>Buenos Aires</option>
+							<option th:each="provincia : ${provincias}" th:value="${provincia.id}"
+								th:text="${provincia.nombre}" id="provincia"></option>
 
-			<div style="position: relative;left:15%;">
+						</select>
+					</div>
+					<label for="warning_select" style="color: white;">Localidad</label>
+					<div class="nes-select is-warning">
+						<select required id="warning_select">
+							<option value="" disabled selected hidden>Burzaco</option>
+							<option th:each="localidad : ${localidades}" th:value="${localidad.id}"
+								th:text="${localidad.nombre}" id="localidad">To be</option>
 
-				<table class="table table-striped " style="background-color: azure;width: 600px;">
-					<thead>
-						<tr>
-							<th scope="col">Nombre</th>
-							<th scope="col">Telefono</th>
-							<th scope="col">Email</th>
-							<th scope="col">sin valor</th>
-							<th scope="col">Acciones</th>
-						</tr>
-					</thead>
+						</select>
+					</div>
+					<label for="warning_select" style="color: white;">Tipo Contacto</label>
+					<div class="nes-select is-warning">
+						<select required id="warning_select">
+							<option value="" disabled selected hidden>Amigo</option>
+							<option th:each="tipoContacto : ${tiposContacto}" th:value="${tipoContacto.id}"
+								th:text="${tipoContacto.nombre}" id="tipoContacto">To be</option>
+						</select>
+					</div>
+				</div>
 				
-						<td><span th:text="${persona.nombre}"> Nombre </span></td>
-						<br>
-						<td><span th:text="${persona.telefono}"> Telefono </span></td>
-						<br>
-						<td><span th:text="${persona.email}"> Email </span></td>
-						<br>
-						<td><span th:text="${persona.telefono}"> Telefono </span></td>
-						<br>
-						<td><a type="button" class="nes-btn is-success"> Confirmar </a>
-							
-						</td>
-
-			
-
-				</table>
+				<div class="botones" style="position: relative;left: -30%;">
+					<a class="btn btn-secondary" th:href="@{/agregar}"
+						style="position: relative;left:65%;top:112px;width: 300px;">Agregar
+						Persona</a><br>
+					
+				</div>
 			</div>
-			
+
 			<div style="text-align: center;">
-			<a class="btn btn-primary" th:href="@{/}" style="position: relative;top:112px;left: 3%;">Volver</a>
+				<a class="btn btn-primary" th:href="@{/}" style="position: relative;top:112px;left: -1%;width: 300px;">Volver</a>
 			</div>
 
 

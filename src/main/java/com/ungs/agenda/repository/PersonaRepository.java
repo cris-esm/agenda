@@ -7,6 +7,6 @@ import com.ungs.agenda.model.Persona;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 @Repository
-public interface PersonaRepository extends JpaRepository<Persona, Integer>{
+public interface PersonaRepository extends JpaRepository<Persona, Long>{
 	
 }

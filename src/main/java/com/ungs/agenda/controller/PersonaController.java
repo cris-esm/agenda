@@ -5,41 +5,78 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ungs.agenda.departamento.PersonaDTO;
 import com.ungs.agenda.model.Persona;
 import com.ungs.agenda.repository.PersonaRepository;
+import com.ungs.agenda.service.ILocalidadService;
+import com.ungs.agenda.service.IPaisService;
+import com.ungs.agenda.service.IPersonaService;
+import com.ungs.agenda.service.IProvinciaService;
+import com.ungs.agenda.service.ITipoContactoService;
 
 @Controller
 @RequestMapping("/")
 public class PersonaController {
-	@Autowired
-	private PersonaRepository personaRepository;
 	
+	@Autowired
+	private IPersonaService personaService;
+	
+	@Autowired
+	private IPaisService paisService;
+	
+	@Autowired
+	private IProvinciaService provinciaService;
+	
+	@Autowired
+	private ILocalidadService localidadService;
+	
+	@Autowired
+	private ITipoContactoService tipoContactoService;
 	
 	@RequestMapping("/")
 	public String index(Model model) {
-		
-		model.addAttribute("list", personaRepository.findAll());
+		model.addAttribute("personas", personaService.getAll());
 		return "index";
 	}
 	
 	@RequestMapping("/agregar")
 	public String agregar(Model model) {
 		
-		//model.addAttribute("list", personaRepository.findAll());
+		model.addAttribute("personas", personaService.getAll());
+		model.addAttribute("paises",paisService.getAll());
+		model.addAttribute("provincias", provinciaService.getProvincias());
+		model.addAttribute("localidades", localidadService.getLocalidades());
+		model.addAttribute("tiposContacto", tipoContactoService.getAll());
+
+
 		return "agregar";
 	}
 	
+	@PostMapping("/adduser")
+    public String addUser( @ModelAttribute("Persona") Persona persona, Model model) {
+        
+		if (true) {
+			
+		}
+        
+        
+        return "redirect:/index";
+    }
 	
+	
+
 	@RequestMapping("/editar/{id}")
-	public String editar(@PathVariable("id") long id,Model model) {
-		Integer i = (int) (long) id;
-		Optional<Persona> persona = personaRepository.findById(i);
-		PersonaDTO personaModelo = TransformDtoPersona(persona);
-		model.addAttribute("persona", personaModelo);
+	public String editar(@PathVariable("id") Long id,Model model) {
+		Persona persona = personaService.getById(id);
+		//PersonaDTO personaModelo = TransformDtoPersona(persona);
+		model.addAttribute("persona", persona);
+
 		return "editar";
 	}
 	
@@ -56,11 +93,11 @@ public class PersonaController {
 	}
 
 	@RequestMapping("/eliminar/{id}")
-	public String eliminar(@PathVariable("id") long id,Model model) {
-		Integer i = (int) (long) id;
-		Optional<Persona> persona = personaRepository.findById(i);
-		PersonaDTO personaModelo = TransformDtoPersona(persona);
-		model.addAttribute("persona", personaModelo);
+	public String eliminar(@PathVariable("id") Long id,Model model) {
+		//Integer i = (int) (long) id;
+		Persona persona = personaService.getById(id);
+		//PersonaDTO personaModelo = TransformDtoPersona(persona);
+		model.addAttribute("persona", persona);
 		return "eliminar";
 	}
 	
