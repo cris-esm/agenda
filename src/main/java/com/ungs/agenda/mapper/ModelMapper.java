@@ -22,24 +22,37 @@ import com.ungs.agenda.model.TipoContacto;
 @Mapper(componentModel = "spring")
 public interface ModelMapper {
 	
+	//Persona
 	public PersonaDTO toPersonaDTO(Persona persona);
-	
-	public List<PersonaDTO> toPersonasDTO(List<Persona> persona);
 	
 	public Persona toPersona(PersonaDTO personaDTO);
 	
+	public List<PersonaDTO> toPersonasDTO(List<Persona> persona);
+	
+	
+	//Domicilio
 	public DomicilioDTO toDomicilioDTO(Domicilio domicilio);
 	
 	@Mapping(target="persona", ignore=true)
 	public Domicilio toDomicilio(DomicilioDTO domicilioDTO);
 	
+	
+	//Pais
 	public PaisDTO toPaisDTO(Pais pais);
 	
+	public Pais toPais(PaisDTO paisDTO);
+	
+	public List<PaisDTO> toPaisesDTO(List<Pais> persona);
+	
+	
+	//Provincia
 	public ProvinciaDTO toProvinciaDTO(Provincia provincia);
 	
 	@Mapping(target="pais", ignore=true)
 	public Provincia toProvincia(ProvinciaDTO provinciaDTO);
 	
+	
+	//Localidad
 	public LocalidadDTO toLocalidadDTO(Localidad localidad);
 	
 	@Mappings({
@@ -48,6 +61,8 @@ public interface ModelMapper {
 	})
 	public Localidad toLocalidad(LocalidadDTO localidadDTO);
 	
+	
+	//TipoContacto
 	public TipoContactoDTO toTipoContactoDTO(TipoContacto tipoContacto);
 	
 	@Mapping(target="personas", ignore=true)

@@ -14,7 +14,7 @@ import com.ungs.agenda.repository.ProvinciaRepository;
 import com.ungs.agenda.service.IProvinciaService;
 
 @Service
-public class ProvinciaServiceImpl implements IProvinciaService{
+public class ProvinciaServiceImpl implements IProvinciaService {
 	
 	@Autowired
 	private ProvinciaRepository provinciaRepo;
