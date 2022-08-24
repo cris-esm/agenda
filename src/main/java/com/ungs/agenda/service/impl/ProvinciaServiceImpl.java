@@ -1,11 +1,14 @@
 package com.ungs.agenda.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ungs.agenda.model.Localidad;
+import com.ungs.agenda.dto.LocalidadDTO;
+import com.ungs.agenda.dto.ProvinciaDTO;
+import com.ungs.agenda.mapper.ModelMapper;
 import com.ungs.agenda.model.Provincia;
 import com.ungs.agenda.repository.ProvinciaRepository;
 import com.ungs.agenda.service.IProvinciaService;
@@ -15,21 +18,23 @@ public class ProvinciaServiceImpl implements IProvinciaService{
 	
 	@Autowired
 	private ProvinciaRepository provinciaRepo;
+	
+	@Autowired
+	private ModelMapper mapper;
 
 	@Override
-	public Provincia getById(Long id) {
-		return provinciaRepo.getById(id);
+	public ProvinciaDTO getById(Long id) {
+		Optional<Provincia> provincia = provinciaRepo.findById(id);
+		return provincia.isPresent() ? mapper.toProvinciaDTO(provincia.get()) : null;
 	}
 	
 	@Override
-	public List<Localidad> getLocalidades(Long idProvincia) {
-		Provincia provincia = provinciaRepo.getById(idProvincia);
-		return provincia.getLocalidades();
+	public List<LocalidadDTO> getLocalidades(Long idProvincia) {
+		Optional<Provincia> provincia = provinciaRepo.findById(idProvincia);
+		if(provincia.isPresent()) {
+			ProvinciaDTO provinciaDTO = mapper.toProvinciaDTO(provincia.get());
+			return provinciaDTO.getLocalidades();
+		}
+		return null;
 	}
-
-	@Override
-	public List<Localidad> getLocalidades(Provincia provincia) {
-		return provincia.getLocalidades();
-	}
-	
 }
