@@ -13,11 +13,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@RequiredArgsConstructor
 @Entity
 @Table(name = "persona")
 public class Persona {
@@ -29,7 +31,6 @@ public class Persona {
 	@Column
 	private String nombre;
 	
-	
 	@Column
 	private String telefono;
 	
@@ -39,15 +40,10 @@ public class Persona {
 	@Column(name="fechanac")
 	private LocalDate fechaNac;
 	
-	@ToString.Exclude
-	@EqualsAndHashCode.Exclude
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "iddomicilio", referencedColumnName = "id")
 	private Domicilio domicilio;
 
-	
-	@ToString.Exclude
-	@EqualsAndHashCode.Exclude
     @ManyToOne
     @JoinColumn(name="idtipocontacto")
 	private TipoContacto tipoContacto;
