@@ -5,15 +5,14 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ungs.agenda.departamento.PersonaDTO;
 import com.ungs.agenda.model.Persona;
-import com.ungs.agenda.repository.PersonaRepository;
 import com.ungs.agenda.service.ILocalidadService;
 import com.ungs.agenda.service.IPaisService;
 import com.ungs.agenda.service.IPersonaService;
@@ -107,4 +106,31 @@ public class PersonaController {
 		//personaRepository.deleteById(model.)
 		return "index";
 	}
+	
+	@RequestMapping("/prueba")
+	public String prueba(Model model) {
+		
+		/*model.addAttribute("personas", personaService.getAll());
+		model.addAttribute("paises",paisService.getAll());
+		model.addAttribute("provincias", provinciaService.getProvincias());
+		model.addAttribute("localidades", localidadService.getLocalidades());
+		model.addAttribute("tiposContacto", tipoContactoService.getAll());*/
+		model.addAttribute("paises",paisService.getAll());
+		model.addAttribute("provincias", provinciaService.getProvincias());
+
+		return "prueba";
+	}
+	
+	   @RequestMapping(value={"/sendPais"},method = RequestMethod.POST)
+	    public String messageCenterHome(Model model) {
+
+	     //   String selectedCity= request.getParameter("nameOfCity");
+		   model.addAttribute("personaje","personaje");
+		   
+	        return "prueba"; 
+	    }
+	
+	
+	
+	
 }
