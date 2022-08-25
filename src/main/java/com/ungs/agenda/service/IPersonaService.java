@@ -15,4 +15,5 @@ public interface IPersonaService {
 	
 	public DomicilioDTO getDomicilio(Long id);
 	
+	public PersonaDTO getById(Long id);	
 }

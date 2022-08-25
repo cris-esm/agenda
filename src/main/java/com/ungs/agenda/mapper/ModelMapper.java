@@ -67,4 +67,6 @@ public interface ModelMapper {
 	
 	@Mapping(target="personas", ignore=true)
 	public TipoContacto toTipoContacto(TipoContactoDTO tipoContactoDTO);
+	
+	public List<TipoContactoDTO> toTiposContactoDTO(List<TipoContacto> tiposContacto);
 }
