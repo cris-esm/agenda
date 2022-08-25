@@ -14,5 +14,7 @@ public interface IPersonaService {
 	public void delete(PersonaDTO persona);
 	
 	public DomicilioDTO getDomicilio(Long id);
+	
+	public PersonaDTO getById(Long id);	
 
 }
