@@ -1,22 +1,23 @@
 package com.ungs.agenda.model;
 
-import javax.persistence.Table;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@RequiredArgsConstructor
 @Entity
 @Table(name="pais")
 public class Pais {
@@ -27,8 +28,6 @@ public class Pais {
 	@Column
 	private String nombre;
 	
-	@ToString.Exclude
-	@EqualsAndHashCode.Exclude
 	@OneToMany(mappedBy = "pais", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Provincia> provincias;
 }

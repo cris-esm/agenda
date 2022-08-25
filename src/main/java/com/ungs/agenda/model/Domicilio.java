@@ -1,20 +1,22 @@
 package com.ungs.agenda.model;
 
-import javax.persistence.Table;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Column;
+import javax.persistence.Table;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@RequiredArgsConstructor
 @Entity
 @Table(name="domicilio")
 public class Domicilio {
@@ -35,13 +37,9 @@ public class Domicilio {
 	@Column
 	private String departamento;
 	
-	@ToString.Exclude
-	@EqualsAndHashCode.Exclude
 	@OneToOne(mappedBy = "domicilio")
 	private Persona persona;
 	
-	@ToString.Exclude
-	@EqualsAndHashCode.Exclude
     @ManyToOne
     @JoinColumn(name="idlocalidad")
 	private Localidad localidad;

@@ -15,10 +15,18 @@
 	<link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
 	<!-- solo estilo del núcleo -->
 	<link href="https://unpkg.com/nes.css/css/nes-core.min.css" rel="stylesheet" />
+	
+	<!-- solo estilo del núcleo -->
+	<link href="https://unpkg.com/nes.css/css/nes-core.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 </head>
 
 <body>
+
+
 
 <div class="container">
 	<section style="position:relative;left: 27%;">
@@ -76,7 +84,26 @@
 
 </div>
 
+<script>
 
+var request = new Request('http://localhost:8080/api/Casa/casaBrasilera');
+			//	$('#customerr').remove();
+
+			fetch(request).then(function (response) {
+				return response.text();
+			}).then(function (text) {
+				elemento = text;
+
+				myArr = JSON.parse(text);
+
+				var data = myArr;
+				console.log(data);
+				
+			});
+			console.log(value);
+
+
+</script>
 </body>
 
 </html>

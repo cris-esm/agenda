@@ -49,7 +49,6 @@ public class PersonaController {
 		
 		model.addAttribute("personas", personaService.getAll());
 		model.addAttribute("paises",paisService.getAll());
-		model.addAttribute("provincias", provinciaService.getProvincias());
 		model.addAttribute("localidades", localidadService.getLocalidades());
 		model.addAttribute("tiposContacto", tipoContactoService.getAll());
 
@@ -72,9 +71,7 @@ public class PersonaController {
 
 	@RequestMapping("/editar/{id}")
 	public String editar(@PathVariable("id") Long id,Model model) {
-		Persona persona = personaService.getById(id);
-		//PersonaDTO personaModelo = TransformDtoPersona(persona);
-		model.addAttribute("persona", persona);
+	
 
 		return "editar";
 	}
@@ -93,10 +90,9 @@ public class PersonaController {
 
 	@RequestMapping("/eliminar/{id}")
 	public String eliminar(@PathVariable("id") Long id,Model model) {
-		//Integer i = (int) (long) id;
-		Persona persona = personaService.getById(id);
-		//PersonaDTO personaModelo = TransformDtoPersona(persona);
-		model.addAttribute("persona", persona);
+		
+	
+		//model.addAttribute("persona", persona);
 		return "eliminar";
 	}
 	
@@ -109,14 +105,7 @@ public class PersonaController {
 	
 	@RequestMapping("/prueba")
 	public String prueba(Model model) {
-		
-		/*model.addAttribute("personas", personaService.getAll());
-		model.addAttribute("paises",paisService.getAll());
-		model.addAttribute("provincias", provinciaService.getProvincias());
-		model.addAttribute("localidades", localidadService.getLocalidades());
-		model.addAttribute("tiposContacto", tipoContactoService.getAll());*/
-		model.addAttribute("paises",paisService.getAll());
-		model.addAttribute("provincias", provinciaService.getProvincias());
+	
 
 		return "prueba";
 	}

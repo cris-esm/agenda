@@ -2,16 +2,14 @@ package com.ungs.agenda.service;
 
 import java.util.List;
 
-import com.ungs.agenda.model.Pais;
-import com.ungs.agenda.model.Provincia;
+import com.ungs.agenda.dto.PaisDTO;
+import com.ungs.agenda.dto.ProvinciaDTO;
 
 public interface IPaisService {
 	
-	public List<Pais> getAll();
+	public List<PaisDTO> getAll();
 	
-	public List<Provincia> getProvincias(Long idPais);
+	public List<ProvinciaDTO> getProvincias(Long idPais);
 	
-	public List<Provincia> getProvincias(Pais pais);
-	
-	
+
 }
