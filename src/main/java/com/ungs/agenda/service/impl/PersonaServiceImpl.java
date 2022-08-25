@@ -41,7 +41,7 @@ public class PersonaServiceImpl implements IPersonaService {
 	@Override
 	public DomicilioDTO getDomicilio(Long id) {
 		Optional<Persona> persona = personaRepo.findById(id);
-		return persona.isPresent() ? mapper.toDomicilioDTO(null) : null;
+		return persona.isPresent() ? mapper.toDomicilioDTO(persona.get().getDomicilio()) : null;
 	}
 
 	@Override
