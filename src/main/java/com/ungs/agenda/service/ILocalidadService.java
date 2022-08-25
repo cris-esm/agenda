@@ -1,9 +1,9 @@
 package com.ungs.agenda.service;
 
-import com.ungs.agenda.model.Localidad;
+import com.ungs.agenda.dto.LocalidadDTO;
 
 public interface ILocalidadService {
 	
-	public Localidad getById(Long id);
+	public LocalidadDTO getById(Long id);
 	
 }
