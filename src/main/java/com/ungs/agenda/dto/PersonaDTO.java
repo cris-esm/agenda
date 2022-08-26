@@ -20,4 +20,8 @@ public class PersonaDTO {
 	private DomicilioDTO domicilio;
 	
 	private TipoContactoDTO tipoContacto;
+	
+	private SignoZodiacoDTO signoZodiaco;
+	
+	private TecnologiaDTO tecnologia;
 }

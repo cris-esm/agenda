@@ -19,8 +19,8 @@ import lombok.Setter;
 @Setter
 @RequiredArgsConstructor
 @Entity
-@Table(name = "tipocontacto")
-public class TipoContacto {
+@Table(name = "tecnologia")
+public class Tecnologia {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +29,6 @@ public class TipoContacto {
 	@Column
 	private String nombre;
 	
-	@OneToMany(mappedBy = "tipoContacto", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "tecnologia", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Persona> personas;
 }
