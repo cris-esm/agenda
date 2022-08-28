@@ -1,36 +1,22 @@
 package com.ungs.agenda.dto;
 
+
+
 import java.io.ByteArrayInputStream;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
 
 public class ReporteDTO {
 	
-	private String fileName;
-	private ByteArrayInputStream stream;
-	private int length;
-
-	public String getFileName() {
-		return fileName;
-	}
-
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-
-	public ByteArrayInputStream getStream() {
-		return stream;
-	}
-
-	public void setStream(ByteArrayInputStream stream) {
-		this.stream = stream;
-	}
-
-	public int getLength() {
-		return length;
-	}
-
-	public void setLength(int length) {
-		this.length = length;
-	}
-
-
+	private String nombre;
+	
+	private ByteArrayInputStream data;
+	
+	private Integer length;
 }

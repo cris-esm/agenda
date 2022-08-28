@@ -45,6 +45,9 @@ public class PersonaController {
 
 	@Autowired
 	private IPaisService paisService;
+	
+	@Autowired
+	private IProvinciaService provinciaService;
 
 	@Autowired
 	private ITipoContactoService tipoContactoService;
@@ -60,7 +63,7 @@ public class PersonaController {
 	public String index(Model model)  {
 		model.addAttribute("personas", personaService.getAll());
 		
-		
+		System.out.println(personaService.getAll());
 
 		return "index";
 	}
@@ -95,7 +98,16 @@ public class PersonaController {
 	@RequestMapping("/editar/{id}")
 	public String editar(@PathVariable("id") Long id, Model model) {
 
-		model.addAttribute("persona", personaService.getById(id));
+		PersonaDTO persona = personaService.getById(id);
+		System.out.println(persona);
+		paisService.getProvincias(id);
+		//provinciaService.getById(id)
+	//	persona.getDomicilio().getLocalidad().get
+		model.addAttribute("paises", paisService.getAll());
+		model.addAttribute("tiposContacto", tipoContactoService.getAll());
+		model.addAttribute("tecnologias", tecnologiaService.getAll());
+		model.addAttribute("signos", signoZodiacoService.getAll());
+		model.addAttribute("persona", persona);
 
 		return "editar";
 	}

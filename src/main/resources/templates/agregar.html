@@ -41,7 +41,7 @@
 				</div>
 				<div class="nes-field">
 					<label for="name_field" style="color: white;">Fecha Nacimiento</label>
-					<input type="text" id="nacimiento" class="nes-input">
+					<input type="date" id="nacimiento" class="nes-input">
 				</div>
 			</div>
 			<div class="datosDom" style="width: 300px;display:inline-block;">
@@ -51,13 +51,16 @@
 				</div>
 				<div class="nes-field">
 					<label for="name_field" style="color: white;">Altura</label>
-					<input type="text" id="altura" class="nes-input">
+					<input type="number" id="altura" class="nes-input">
 				</div>
 				<div class="nes-field">
 					<label for="name_field" style="color: white;">Piso</label>
 					<input type="text" id="piso" class="nes-input">
 				</div>
-			
+				<div class="nes-field">
+					<label for="name_field" style="color: white;">Departamento</label>
+					<input type="text" id="departamento" class="nes-input">
+				</div>
 			</div>
 			<div class="domicilio" style="width: 300px;display:inline-block;">
 				<label for="warning_select" style="color: white;">Pais</label>
@@ -79,27 +82,20 @@
 				</div>
 				<label for="warning_select" style="color: white;">Localidad</label>
 				<div class="nes-select is-warning">
-					<select id="customerNameListLocalidad" name="customerrr">
+					<select id="customerNameListLocalidad" name="customerrr" onchange="getLocalidad(this)">
 						<option value="" disabled selected hidden>Select...</option>
 						<option th:each="localidad : ${localidades}" th:value="${localidad.id}"
 							th:text="${localidad.nombre}" id="localidad">To be</option>
 
 					</select>
 				</div>
-				<label for="warning_select" style="color: white;">Tipo Contacto</label>
-				<div class="nes-select is-warning">
-					<select required id="warning_select">
-						<option value="" disabled selected hidden>Select...</option>
-						<option th:each="tipoContacto : ${tiposContacto}" th:value="${tipoContacto.id}"
-							th:text="${tipoContacto.nombre}" id="tipoContacto">Tipo Contacto</option>
-					</select>
-				</div>
+
 
 			</div>
 			<div style="position: relative;width: 300px;top:-290px;left: 1020px;">
 				<label for="warning_select" style="color: white;">Tecnologia Preferida</label>
 				<div class="nes-select is-warning">
-					<select required id="warning_select">
+					<select required id="warning_select" onchange="getTecnologia(this)">
 						<option value="" disabled selected hidden>Select...</option>
 						<option th:each="tecnologia : ${tecnologias}" th:value="${tecnologia.id}"
 							th:text="${tecnologia.nombre}" id="tecnologia">To be</option>
@@ -107,16 +103,24 @@
 				</div>
 				<label for="warning_select" style="color: white;">Signo Zodiacal</label>
 				<div class="nes-select is-warning">
-					<select required id="warning_select">
+					<select required id="warning_select" onchange="getSigno(this)">
 						<option value="" disabled selected hidden>Select...</option>
 						<option th:each="signo : ${signos}" th:value="${signo.id}" th:text="${signo.nombre}" id="signo">
 							To be</option>
 					</select>
 				</div>
+				<label for="warning_select" style="color: white;">Tipo Contacto</label>
+				<div class="nes-select is-warning">
+					<select required id="warning_select" onchange="getTipoContacto(this)">
+						<option value="" disabled selected hidden>Select...</option>
+						<option th:each="tipoContacto : ${tiposContacto}" th:value="${tipoContacto.id}"
+							th:text="${tipoContacto.nombre}" id="tipoContacto">Tipo Contacto</option>
+					</select>
+				</div>
 			</div>
 			<div class="botones" style="position: relative;left: -25%;bottom: 250px;">
 				<a class="btn btn-secondary" th:object="${Persona}" method="post"
-					style="position: relative;left:35%;top:112px;" onclick="agregarPersona()">Agregar
+					style="position: relative;left:35%;top:112px;" th:action="@{/adduser}" onclick="agregarPersona()" >Agregar
 					Persona</a><br>
 				<div style="position:relative;left: 35%;">
 					<a class="btn btn-primary" th:href="@{/}" style="position: relative;top:112px;">Volver</a>
@@ -125,9 +129,27 @@
 		</div>
 
 		<script>
+			var provinciaSeleccionada;
+			var localidadSeleccionada;
+			var tecnologiaSeleccionada;
+			var signoSeleccionada;
+			var tipoContactoSeleccionado;
 
-			function nombre(selectObject) {
 
+			function getLocalidad(selectObject) {
+				localidadSeleccionada = selectObject.value;
+								console.log(selectObject.value);
+
+			}
+
+			function getSigno(selectObject) {
+				signoSeleccionada = selectObject.value;
+			}
+			function getTipoContacto(selectObject) {
+				tipoContactoSeleccionado = selectObject.value;
+			}
+			function getTecnologia(selectObject) {
+				tecnologiaSeleccionada = selectObject.value;
 			}
 			function agregarPersona() {
 				var nombre = document.getElementById("nombre").value;
@@ -139,16 +161,37 @@
 				var piso = document.getElementById("piso").value;
 				var departamento = document.getElementById("departamento").value;
 				var pais = document.getElementById("pais").value;
-				var provincia = document.getElementById("provincia").value;
-				var localidad = document.getElementById("localidad").value;
-				var tipoContacto = document.getElementById("tipoContacto").value;
-				var tecnologia = document.getElementById("tecnologia").value;
-				var signo = document.getElementById("signo").value;
+				var provincia = provinciaSeleccionada;
+				var tipoContactoo = tipoContactoSeleccionado;
+				//var tecnologia = tecnologiaSeleccionada;
+				var signoo = signoSeleccionada;
 				//var provincia = document.getElementById("provincia").value
+				
+				
+				let tipoContacto = {id: tipoContactoSeleccionado };
+				let tecnologia = {id: tecnologiaSeleccionada };
+				let localidad = {id: localidadSeleccionada};
+				let signoZodiaco = {id: signoSeleccionada};
+				let domicilio = {  calle: calle, altura: altura, piso: piso, departamento:
+				 departamento, localidad: localidad };
 				let person = {
-					nombre: nombre, telefono: telefono, email: email, nacimiento: nacimiento,
-					calle: calle, altura: altura, piso: piso, departamento: departamento, pais: pais, provincia: provincia
+					nombre: nombre, telefono: telefono, email: email, fechaNac: nacimiento,domicilio,
+				 pais: pais, provincia: provincia,
+					 tipoContacto: tipoContacto, signoZodiaco: signoZodiaco, tecnologia: tecnologia
 				};
+
+
+
+				fetch('http://localhost:8080/api/Persona/save', {
+					method: 'POST',
+					headers: {
+						'Accept': 'application/json, text/plain, */*',
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(person)
+				}).then(res => res.json())
+					.then(res => console.log(res));
+
 
 
 				console.log(person);
@@ -188,6 +231,9 @@
 
 			function getComboB(selectObject) {
 				var value = selectObject.value;
+				
+
+				provinciaSeleccionada = value;
 
 				$("#customerNameListLocalidad > option").each(function () {
 					$("#customerNameListLocalidad option[value='" + value + "']").remove();
