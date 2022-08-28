@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ungs.agenda.dto.LocalidadDTO;
+import com.ungs.agenda.dto.PaisDTO;
 import com.ungs.agenda.dto.ProvinciaDTO;
 import com.ungs.agenda.mapper.ModelMapper;
 import com.ungs.agenda.model.Provincia;
@@ -29,12 +30,18 @@ public class ProvinciaServiceImpl implements IProvinciaService {
 	}
 	
 	@Override
-	public List<LocalidadDTO> getLocalidades(Long idProvincia) {
-		Optional<Provincia> provincia = provinciaRepo.findById(idProvincia);
+	public List<LocalidadDTO> getLocalidades(Long id) {
+		Optional<Provincia> provincia = provinciaRepo.findById(id);
 		if(provincia.isPresent()) {
 			ProvinciaDTO provinciaDTO = mapper.toProvinciaDTO(provincia.get());
 			return provinciaDTO.getLocalidades();
 		}
 		return null;
+	}
+
+	@Override
+	public PaisDTO getPaisByProvincia(Long id) {
+		Optional<Provincia> provincia = provinciaRepo.findById(id);
+		return provincia.isPresent() ? mapper.toPaisDTO(provincia.get().getPais()) : null;
 	}
 }
