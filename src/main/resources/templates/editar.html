@@ -32,7 +32,7 @@
 			<div class="container">
 				<div clas="persona" style="width: 300px;display:inline-block;">
 					<div class="nes-field">
-						<label  for="name_field" style="color: white;">Nombre</label >
+						<label for="name_field" style="color: white;">Nombre</label>
 						<input th:value="${persona.nombre}" type="text" id="name_field" class="nes-input">
 					</div>
 					<div class="nes-field">
@@ -41,7 +41,7 @@
 					</div>
 					<div class="nes-field">
 						<label for="name_field" style="color: white;">Email</label>
-						<input th:value="${persona.email}"  type="text" id="name_field" class="nes-input">
+						<input th:value="${persona.email}" type="text" id="name_field" class="nes-input">
 					</div>
 					<div class="nes-field">
 						<label for="name_field" style="color: white;">Fecha Nacimiento</label>
@@ -51,7 +51,7 @@
 				<div class="datosDom" style="width: 300px;display:inline-block;">
 					<div class="nes-field">
 						<label for="name_field" style="color: white;">Calle</label>
-						<input  th:value="${persona.domicilio.calle}" type="text" id="name_field" class="nes-input">
+						<input th:value="${persona.domicilio.calle}" type="text" id="name_field" class="nes-input">
 					</div>
 					<div class="nes-field">
 						<label for="name_field" style="color: white;">Altura</label>
@@ -63,14 +63,15 @@
 					</div>
 					<div class="nes-field">
 						<label for="name_field" style="color: white;">Departamento</label>
-						<input th:value="${persona.domicilio.departamento}" type="text" id="name_field" class="nes-input">
+						<input th:value="${persona.domicilio.departamento}" type="text" id="name_field"
+							class="nes-input">
 					</div>
 				</div>
 				<div class="domicilio" style="width: 300px;display:inline-block;">
 					<label for="warning_select" style="color: white;">Pais</label>
 					<div class="nes-select is-warning">
 						<select required id="warning_select" name="pais">
-							<option  value="" disabled selected hidden>Argentina</option>
+							<option value="" disabled selected hidden>Argentina</option>
 							<option th:each="pais : ${paises}" th:value="${pais.id}" th:text="${pais.nombre}" id="pais">
 							</option>
 						</select>
@@ -102,18 +103,38 @@
 						</select>
 					</div>
 				</div>
-				
+				<div style="position: relative;width: 300px;top:-290px;left: 1020px;">
+					<label for="warning_select" style="color: white;">Tecnologia Preferida</label>
+					<div class="nes-select is-warning">
+						<select required id="warning_select">
+							<option value="" disabled selected hidden>Select...</option>
+							<option th:each="tecnologia : ${tecnologias}" th:value="${tecnologia.id}"
+								th:text="${tecnologia.nombre}" id="tecnologia">To be</option>
+						</select>
+					</div>
+					<label for="warning_select" style="color: white;">Signo Zodiacal</label>
+					<div class="nes-select is-warning">
+						<select required id="warning_select">
+							<option value="" disabled selected hidden>Select...</option>
+							<option th:each="signo : ${signos}" th:value="${signo.id}" th:text="${signo.nombre}"
+								id="signo">
+								To be</option>
+						</select>
+					</div>
+				</div>
 				<div class="botones" style="position: relative;left: -30%;">
-					<a class="btn btn-secondary" th:href="@{/agregar}"
+					<a class="btn btn-secondary" th:href="@{/actualizar/} + ${id}"
 						style="position: relative;left:65%;top:112px;width: 300px;">
 						Actualizar</a><br>
-					
+
 				</div>
 			</div>
 
 			<div style="text-align: center;">
-				<a class="btn btn-primary" th:href="@{/}" style="position: relative;top:112px;left: -1%;width: 300px;">Volver</a>
+				<a class="btn btn-primary" th:href="@{/}"
+					style="position: relative;top:112px;left: -1%;width: 300px;">Volver</a>
 			</div>
+
 
 
 	</body>

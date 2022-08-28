@@ -26,6 +26,7 @@
 
 <body>
 
+								<a th:href="@{/report/ventas/download?tipo=PDF}" class="nes-btn is-success">reporte</a>
 
 
 <div class="container">
@@ -46,13 +47,13 @@
 
 	<br><br><br><br>
 	<div class="container">
-		<div style="position: relative;top:100px;left: 28%;">
+		<div style="position: relative;top:50px;left: 28%;">
 			<i class="nes-charmander" style="position: relative;top:20px"></i>
 			<a type="button" class="nes-btn is-warning" th:href="@{/agregar}">Agregar Persona</a>
 			<i class="nes-mario"  style="position: relative;top:20px"></i>
 		</div>
 
-		<div style="position: relative;left: 5%;top:50px;width: 1100px;top:100px;">
+		<div style="position: relative;left: -10%;top:50px;width:1450px;top:50px;height: 90%;font-size: 10px;text-align: center;">
 			<div class="nes-table-responsive">
 				<table class="nes-table is-bordered is-centered">
 					<thead>
@@ -60,7 +61,11 @@
 							<th>Nombre</th>
 							<th>Telefono</th>
 							<th>Email</th>
-							<th>sin valor</th>
+							<th>Cumpleaños</th>
+							<th>Domicilio</th>
+							<th>Tipo Contacto</th>
+							<th>Signo Zodiacal</th>
+							<th>Tecnologia Preferida</th>
 							<th>Acciones</th>
 						</tr>
 					</thead>
@@ -69,7 +74,11 @@
 							<td><span th:text="${persona.nombre}"> Nombre </span></td>
 							<td><span th:text="${persona.telefono}"> Telefono </span></td>
 							<td><span th:text="${persona.email}"> Email </span></td>
-							<td><span th:text="${persona.telefono}"> Telefono </span></td>
+							<td><span th:text="${persona.fechaNac}"> Cumpleaños </span></td>
+							<td><span th:text="${persona.domicilio.calle + ' ' + persona.domicilio.altura + ', ' + persona.domicilio.localidad.nombre}"> Domicilio </span></td>
+							<td><span th:text="${persona.tipoContacto.nombre}"> Contacto </span></td>
+							<td><span th:text="${persona.signoZodiaco.nombre}"> Signo Zodiacal </span></td>
+							<td><span th:text="${persona.tecnologia.nombre}"> Tecnologia Preferida </span></td>
 							<td> <a type="button" th:href="@{/eliminar/} + ${persona.id}"
 									class="nes-btn is-error">eliminar</a>
 
@@ -84,26 +93,6 @@
 
 </div>
 
-<script>
-
-var request = new Request('http://localhost:8080/api/Casa/casaBrasilera');
-			//	$('#customerr').remove();
-
-			fetch(request).then(function (response) {
-				return response.text();
-			}).then(function (text) {
-				elemento = text;
-
-				myArr = JSON.parse(text);
-
-				var data = myArr;
-				console.log(data);
-				
-			});
-			console.log(value);
-
-
-</script>
 </body>
 
 </html>

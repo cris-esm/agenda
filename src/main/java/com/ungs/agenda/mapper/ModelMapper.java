@@ -11,12 +11,16 @@ import com.ungs.agenda.dto.LocalidadDTO;
 import com.ungs.agenda.dto.PaisDTO;
 import com.ungs.agenda.dto.PersonaDTO;
 import com.ungs.agenda.dto.ProvinciaDTO;
+import com.ungs.agenda.dto.SignoZodiacoDTO;
+import com.ungs.agenda.dto.TecnologiaDTO;
 import com.ungs.agenda.dto.TipoContactoDTO;
 import com.ungs.agenda.model.Domicilio;
 import com.ungs.agenda.model.Localidad;
 import com.ungs.agenda.model.Pais;
 import com.ungs.agenda.model.Persona;
 import com.ungs.agenda.model.Provincia;
+import com.ungs.agenda.model.SignoZodiaco;
+import com.ungs.agenda.model.Tecnologia;
 import com.ungs.agenda.model.TipoContacto;
 
 @Mapper(componentModel = "spring")
@@ -69,4 +73,21 @@ public interface ModelMapper {
 	public TipoContacto toTipoContacto(TipoContactoDTO tipoContactoDTO);
 	
 	public List<TipoContactoDTO> toTiposContactoDTO(List<TipoContacto> tiposContacto);
+	
+	
+	//SignoZodiaco
+	public SignoZodiacoDTO toSignoZodiacoDTO(SignoZodiaco signoZodiaco);
+	
+	@Mapping(target="personas", ignore=true)
+	public SignoZodiaco toSignoZodiaco(SignoZodiacoDTO signoZodiacoDTO);
+	
+	public List<SignoZodiacoDTO> toSignosZodiacoDTO(List<SignoZodiaco> signosZodiaco);
+	
+	//Tecnologia
+	public TecnologiaDTO toTecnologiaDTO(Tecnologia tecnologia);
+	
+	@Mapping(target="personas", ignore=true)
+	public Tecnologia toTecnologia(TecnologiaDTO tecnologiaDTO);
+	
+	public List<TecnologiaDTO> toTecnologiasDTO(List<Tecnologia> tecnologias);
 }

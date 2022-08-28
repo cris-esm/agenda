@@ -10,6 +10,7 @@ public interface IProvinciaService {
 	public ProvinciaDTO getById(Long id);
 	
 	public List<LocalidadDTO> getLocalidades(Long idProvincia);
-	
+
+
 
 }
