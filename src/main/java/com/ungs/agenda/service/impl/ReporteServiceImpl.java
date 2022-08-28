@@ -41,5 +41,37 @@ public class ReporteServiceImpl implements IReporteService {
 		
 		return reporte;
 	}
+	
+	@Override
+	public ReporteDTO obtenerReporteTecnologiaAscendente(Map<String, Object> params) throws JRException, IOException, SQLException {
+		String nombreArchivo = "TecnologiaAscendente";
+		ByteArrayOutputStream stream = reportManager.export(nombreArchivo, 
+															params, 
+															dataSource.getConnection());
+		
+		ReporteDTO reporte = new ReporteDTO();
+		reporte.setNombre(nombreArchivo + ".pdf");
+		byte[] bstream = stream.toByteArray();
+		reporte.setData(new ByteArrayInputStream(bstream));
+		reporte.setLength(bstream.length);
+		
+		return reporte;
+	}
+
+	@Override
+	public ReporteDTO obtenerReporteTecnologiaDescendete(Map<String, Object> params) throws JRException, IOException, SQLException {
+		String nombreArchivo = "TecnologiaDescendente";
+		ByteArrayOutputStream stream = reportManager.export(nombreArchivo, 
+															params, 
+															dataSource.getConnection());
+		
+		ReporteDTO reporte = new ReporteDTO();
+		reporte.setNombre(nombreArchivo + ".pdf");
+		byte[] bstream = stream.toByteArray();
+		reporte.setData(new ByteArrayInputStream(bstream));
+		reporte.setLength(bstream.length);
+		
+		return reporte;
+	}
 
 }

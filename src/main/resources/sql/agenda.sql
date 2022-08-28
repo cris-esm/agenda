@@ -1,4 +1,4 @@
-\c agenda;
+\c agenda
 
 CREATE TABLE IF NOT EXISTS Pais(
     id serial,
@@ -195,4 +195,13 @@ insert into domicilio values(default, 'calle falsa', 456, '1', '1a', 4);
 
 insert into persona values(default, 'Cristian Egas', '1122334455', 'cris@gmail.com', '1998-03-13', 1, 1, 12, 1);
 insert into persona values(default, 'Mariano Franzetti', '1166778899', 'mariano@gmail.com', '1998-01-01', 2, 1, null, 4);
-
+insert into persona values(default, 'test 1', null, null, '1998-01-01', null, 1, 2, null);
+insert into persona values(default, 'test 2', null, null, '1998-01-01', null, 1, 4, null);
+insert into persona values(default, 'test 3', null, null, '1998-01-01', null, 1, 2, null);
+insert into persona values(default, 'test 4', null, null, '1998-01-01', null, 1, 2, null);
+insert into persona values(default, 'test 5', null, null, '1998-01-01', null, 1, 3, null);
+insert into persona values(default, 'test 6', null, null, '1998-01-01', null, 1, 3, null);
+insert into persona values(default, 'test 7', null, null, '1998-01-01', null, 1, 4, null);
+insert into persona values(default, 'test 8', null, null, '1998-01-01', null, 1, 2, null);
+insert into persona values(default, 'test 9', null, null, '1998-01-01', null, 1, 2, null);
+insert into persona values(default, 'test 10', null, null, '1998-01-01', null, 1, 8, null);
