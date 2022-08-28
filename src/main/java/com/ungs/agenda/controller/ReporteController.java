@@ -27,8 +27,28 @@ public class ReporteController {
 	private IReporteService reporteService;
 	
 	@GetMapping(path="/signos/download")
-	public ResponseEntity<Resource> download(@RequestParam Map<String, Object> params) throws JRException, IOException, SQLException{
+	public ResponseEntity<Resource> downloadSignos(@RequestParam Map<String, Object> params) throws JRException, IOException, SQLException{
 		ReporteDTO reporte = reporteService.obtenerReporteSignos(params);
+		InputStreamResource streamResource = new InputStreamResource(reporte.getData());
+		return ResponseEntity.ok().header("Content-Disposition", 
+										  "inline; filename=\"" + reporte.getNombre() + "\"")
+										  .contentLength(reporte.getLength())
+										  .contentType(MediaType.APPLICATION_PDF).body(streamResource);
+	}
+	
+	@GetMapping(path="/tecnologia/ascendente/download")
+	public ResponseEntity<Resource> downloadTecAsc(@RequestParam Map<String, Object> params) throws JRException, IOException, SQLException{
+		ReporteDTO reporte = reporteService.obtenerReporteTecnologiaAscendente(params);
+		InputStreamResource streamResource = new InputStreamResource(reporte.getData());
+		return ResponseEntity.ok().header("Content-Disposition", 
+										  "inline; filename=\"" + reporte.getNombre() + "\"")
+										  .contentLength(reporte.getLength())
+										  .contentType(MediaType.APPLICATION_PDF).body(streamResource);
+	}
+	
+	@GetMapping(path="/tecnologia/descendente/download")
+	public ResponseEntity<Resource> downloadTecDesc(@RequestParam Map<String, Object> params) throws JRException, IOException, SQLException{
+		ReporteDTO reporte = reporteService.obtenerReporteTecnologiaDescendete(params);
 		InputStreamResource streamResource = new InputStreamResource(reporte.getData());
 		return ResponseEntity.ok().header("Content-Disposition", 
 										  "inline; filename=\"" + reporte.getNombre() + "\"")
