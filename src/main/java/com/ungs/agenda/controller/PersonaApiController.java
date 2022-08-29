@@ -1,6 +1,10 @@
 package com.ungs.agenda.controller;
 
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,8 +37,13 @@ public class PersonaApiController {
 	 public void updatePersona(@RequestBody PersonaDTO persona, Long id) {
 		 
 		 PersonaDTO personaExistente = personaService.getById(id);
+		 System.out.println(personaExistente.getNombre());
 		 
-		 personaExistente.setNombre(persona.getNombre());
+		 if (personaExistente != null) {
+			
+			 personaExistente.setNombre(persona.getNombre());
+		}
+		 
 		 
 		 personaService.saveOrUpdate(personaExistente);
 	  }

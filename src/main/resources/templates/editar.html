@@ -19,7 +19,7 @@
 	<link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
 	<!-- solo estilo del núcleo -->
 	<link href="https://unpkg.com/nes.css/css/nes-core.min.css" rel="stylesheet" />
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
 <body style="background-image:url(../static/img/mario.jpg) no-repeat center center fixed;">
@@ -31,7 +31,7 @@
 			<div clas="persona" style="width: 300px;display:inline-block;">
 				<div class="nes-field">
 					<label for="name_field" style="color: white;">Nombre</label>
-					<input type="text" id="nombre" th:field="*{persona.nombre}"  class="nes-input">
+					<input type="text" id="nombre" th:field="*{persona.nombre}" class="nes-input">
 				</div>
 				<div class="nes-field">
 					<label for="name_field" style="color: white;">Telefono</label>
@@ -43,7 +43,7 @@
 				</div>
 				<div class="nes-field">
 					<label for="name_field" style="color: white;">Fecha Nacimiento</label>
-					<input type="text" id="nacimiento"  th:field="*{persona.fechaNac}" class="nes-input">
+					<input type="text" id="nacimiento" th:field="*{persona.fechaNac}" class="nes-input">
 				</div>
 			</div>
 			<div class="datosDom" style="width: 300px;display:inline-block;">
@@ -53,11 +53,11 @@
 				</div>
 				<div class="nes-field">
 					<label for="name_field" style="color: white;">Altura</label>
-					<input type="number" id="altura"  th:field="*{persona.domicilio.altura}" class="nes-input">
+					<input type="number" id="altura" th:field="*{persona.domicilio.altura}" class="nes-input">
 				</div>
 				<div class="nes-field">
 					<label for="name_field" style="color: white;">Piso</label>
-					<input type="text" id="piso"  th:field="*{persona.domicilio.piso}" class="nes-input">
+					<input type="text" id="piso" th:field="*{persona.domicilio.piso}" class="nes-input">
 				</div>
 				<div class="nes-field">
 					<label for="name_field" style="color: white;">Departamento</label>
@@ -68,26 +68,23 @@
 				<label for="warning_select" style="color: white;">Pais</label>
 				<div class="nes-select is-warning">
 					<select id="customerNameList" name="customer" onchange="getComboA(this)">
-						<option value="" disabled selected hidden>Select...</option>
-						<option th:each="pais : ${paises}" th:value="${pais.id}" id="pais">
-						</option>
+						<option id="primerPais" disabled selected hidden>Select...</option>
+						<option th:each="pais : ${paises}" th:value="${pais.id}"
+						 th:text="${pais.nombre}" id="pais"></option>
 					</select>
 				</div>
 				<label for="warning_select" style="color: white;" name="provincia">Provincia</label>
 				<div class="nes-select is-warning">
 					<select id="customerNameListProvincia" name="customerr" onchange="getComboB(this)">
-						<option value="" disabled selected hidden>Select...</option>
-						<option th:each="provincia : ${provincias}" th:value="${provincia.id}"
-							th:text="${provincia.nombre}" id="provincia"></option>
-
+						<option value="" id="primerProvincia" disabled selected hidden>Select...</option>
+						<option id="provincia"></option>
 					</select>
 				</div>
 				<label for="warning_select" style="color: white;">Localidad</label>
 				<div class="nes-select is-warning">
 					<select id="customerNameListLocalidad" name="customerrr" onchange="getLocalidad(this)">
-						<option th:value="*{persona.domicilio.id}"
-							th:text="*{persona.domicilio.departamento}" disabled selected hidden>Select...</option>
-						<option   id="localidad">To be</option>
+						<option th:value="*{persona.domicilio.localidad.id}" th:text="*{persona.domicilio.localidad.nombre}" disabled
+						id="localidad"	selected hidden>Select...</option>
 
 					</select>
 				</div>
@@ -98,8 +95,8 @@
 				<label for="warning_select" style="color: white;">Tecnologia Preferida</label>
 				<div class="nes-select is-warning">
 					<select required id="warning_select" onchange="getTecnologia(this)">
-						<option th:value="*{persona.tecnologia.id}"
-							th:text="*{persona.tecnologia.nombre}" disabled selected hidden>Select...</option>
+						<option th:value="*{persona.tecnologia.id}" th:text="*{persona.tecnologia.nombre}" disabled
+							selected hidden>Select...</option>
 						<option th:each="tecnologia : ${tecnologias}" th:value="${tecnologia.id}"
 							th:text="${tecnologia.nombre}" id="tecnologia">To be</option>
 					</select>
@@ -107,8 +104,8 @@
 				<label for="warning_select" style="color: white;">Signo Zodiacal</label>
 				<div class="nes-select is-warning">
 					<select required id="warning_select" onchange="getSigno(this)">
-						<option th:value="*{persona.signoZodiaco.id}"
-							th:text="*{persona.signoZodiaco.nombre}" disabled selected hidden>Select...</option>
+						<option th:value="*{persona.signoZodiaco.id}" th:text="*{persona.signoZodiaco.nombre}" disabled
+							selected hidden>Select...</option>
 						<option th:each="signo : ${signos}" th:value="${signo.id}" th:text="${signo.nombre}" id="signo">
 							To be</option>
 					</select>
@@ -116,8 +113,8 @@
 				<label for="warning_select" style="color: white;">Tipo Contacto</label>
 				<div class="nes-select is-warning">
 					<select required id="warning_select" onchange="getTipoContacto(this)">
-						<option th:value="*{persona.tipoContacto.id}"
-							th:text="*{persona.tipoContacto.nombre}" disabled selected hidden>Select...</option>
+						<option th:value="*{persona.tipoContacto.id}" th:text="*{persona.tipoContacto.nombre}" disabled
+							selected hidden>Select...</option>
 						<option th:each="tipoContacto : ${tiposContacto}" th:value="${tipoContacto.id}"
 							th:text="${tipoContacto.nombre}" id="tipoContacto">Tipo Contacto</option>
 					</select>
@@ -125,7 +122,8 @@
 			</div>
 			<div class="botones" style="position: relative;left: -25%;bottom: 250px;">
 				<a class="btn btn-secondary" th:object="${Persona}" method="post"
-					style="position: relative;left:35%;top:112px;" th:action="@{/adduser}" onclick="agregarPersona()" >Agregar
+					style="position: relative;left:35%;top:112px;" th:action="@{/adduser}"
+					onclick="agregarPersona()">Actualizar
 					Persona</a><br>
 				<div style="position:relative;left: 35%;">
 					<a class="btn btn-primary" th:href="@{/}" style="position: relative;top:112px;">Volver</a>
@@ -134,6 +132,54 @@
 		</div>
 
 		<script>
+			var LocalidadToProvincia = document.getElementById("customerNameListLocalidad").value;
+			console.log(LocalidadToProvincia);
+		     var prov ;
+		     var paisObt;
+				
+					var request = new Request('http://localhost:8080/api/Provincias/getByLocalidad/' + LocalidadToProvincia);
+				//	$('#customerr').remove();
+
+				fetch(request).then(function (response) {
+					return response.text();
+				}).then(function (text) {
+					elemento = text;
+
+					myArr = JSON.parse(text);					
+					
+					 prov = { id:myArr.id , nombre: myArr.nombre  };
+					console.log(prov);
+					
+					var provinciaDefinida = document.getElementById("primerProvincia");
+					provinciaDefinida.value = prov.id;
+					provinciaDefinida.text = prov.nombre;
+					
+					
+					
+					
+					request = new Request('http://localhost:8080/api/paises/' + prov.id);
+				fetch(request).then(function (response) {
+					return response.text();
+				}).then(function (text) {
+					elemento = text;
+
+					myArr = JSON.parse(text);		
+					 paisObt = { id:myArr.id , nombre: myArr.nombre };
+					console.log(paisObt);
+					
+					var PaisDefinido = document.getElementById("primerPais");
+					PaisDefinido.value = paisObt.id;
+					PaisDefinido.text = paisObt.nombre;
+					
+						
+					
+	}
+				);
+					});
+					
+				console.log(paisObt);
+				console.log(prov);
+
 			var provinciaSeleccionada;
 			var localidadSeleccionada;
 			var tecnologiaSeleccionada;
@@ -143,7 +189,7 @@
 
 			function getLocalidad(selectObject) {
 				localidadSeleccionada = selectObject.value;
-								console.log(selectObject.value);
+				console.log(selectObject.value);
 
 			}
 
@@ -170,19 +216,25 @@
 				var tipoContactoo = tipoContactoSeleccionado;
 				//var tecnologia = tecnologiaSeleccionada;
 				var signoo = signoSeleccionada;
+				if(signoo == null){
+					signoo =  document.getElementById("signo").value.id;
+				}
 				//var provincia = document.getElementById("provincia").value
-				
-				
-				let tipoContacto = {id: tipoContactoSeleccionado };
-				let tecnologia = {id: tecnologiaSeleccionada };
+
+			//	var nacimientoModificado = nacimiento.split("/").reverse().join("-");
+				const nacimientoModificado = new Date(nacimiento);
+				let tipoContacto = {id: tipoContactoSeleccionado};
+				let tecnologia = {id: tecnologiaSeleccionada};
 				let localidad = {id: localidadSeleccionada};
 				let signoZodiaco = {id: signoSeleccionada};
-				let domicilio = {  calle: calle, altura: altura, piso: piso, departamento:
-				 departamento, localidad: localidad };
+				let domicilio = {
+					calle: calle, altura: altura, piso: piso, departamento:
+						departamento, localidad: localidad
+				};
 				let person = {
-					nombre: nombre, telefono: telefono, email: email, fechaNac: nacimiento,domicilio,
-				 pais: pais, provincia: provincia,
-					 tipoContacto: tipoContacto, signoZodiaco: signoZodiaco, tecnologia: tecnologia
+					nombre: nombre, telefono: telefono, email: email, fechaNac: nacimientoModificado, domicilio,
+					pais: pais, provincia: provincia,
+					tipoContacto: tipoContacto, signoZodiaco: signoZodiaco, tecnologia: tecnologia
 				};
 
 
@@ -199,11 +251,12 @@
 
 
 
-				console.log(person);
 			}
 
 			function getComboA(selectObject) {
 				var value = selectObject.value;
+				
+				
 
 				console.log(selectObject);
 				$("#customerNameListProvincia > option").each(function () {
@@ -214,7 +267,16 @@
 					$("#customerNameListLocalidad option[value='" + value + "']").remove();
 				});
 
-
+				var provinciaDefinida = document.getElementById("primerProvincia");
+				provinciaDefinida.value = "";
+				provinciaDefinida.text = "";
+				
+					var localidadDefinida = document.getElementById("localidad");
+				localidadDefinida.value = "";
+				localidadDefinida.text = "";
+				
+				//customerNameListProvincia
+				
 				var request = new Request('http://localhost:8080/api/Provincias/' + value);
 				//	$('#customerr').remove();
 
@@ -236,11 +298,14 @@
 
 			function getComboB(selectObject) {
 				var value = selectObject.value;
-				
+
 
 				provinciaSeleccionada = value;
+				
 
-				$("#customerNameListLocalidad > option").each(function () {
+				console.log(provinciaSeleccionada);
+				
+					$("#customerNameListLocalidad > option").each(function () {
 					$("#customerNameListLocalidad option[value='" + value + "']").remove();
 				});
 
@@ -256,6 +321,7 @@
 					console.log(myArr);
 
 					var data = myArr;
+					console.log(data);
 					for (var index = 0; index <= data.length - 1; index++) {
 						$('#customerNameListLocalidad').append('<option value="' + data[index].id + '">' + data[index].nombre + '</option>');
 					}
