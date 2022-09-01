@@ -69,8 +69,8 @@
 				<div class="nes-select is-warning">
 					<select id="customerNameList" name="customer" onchange="getComboA(this)">
 						<option id="primerPais" disabled selected hidden>Select...</option>
-						<option th:each="pais : ${paises}" th:value="${pais.id}"
-						 th:text="${pais.nombre}" id="pais"></option>
+						<option th:each="pais : ${paises}" th:value="${pais.id}" th:text="${pais.nombre}" id="pais">
+						</option>
 					</select>
 				</div>
 				<label for="warning_select" style="color: white;" name="provincia">Provincia</label>
@@ -83,8 +83,9 @@
 				<label for="warning_select" style="color: white;">Localidad</label>
 				<div class="nes-select is-warning">
 					<select id="customerNameListLocalidad" name="customerrr" onchange="getLocalidad(this)">
-						<option th:value="*{persona.domicilio.localidad.id}" th:text="*{persona.domicilio.localidad.nombre}" disabled
-						id="localidad"	selected hidden>Select...</option>
+						<option th:value="*{persona.domicilio.localidad.id}"
+							th:text="*{persona.domicilio.localidad.nombre}" disabled id="localidad" selected hidden>
+							Select...</option>
 
 					</select>
 				</div>
@@ -134,51 +135,51 @@
 		<script>
 			var LocalidadToProvincia = document.getElementById("customerNameListLocalidad").value;
 			console.log(LocalidadToProvincia);
-		     var prov ;
-		     var paisObt;
-				
-					var request = new Request('http://localhost:8080/api/Provincias/getByLocalidad/' + LocalidadToProvincia);
-				//	$('#customerr').remove();
+			var prov;
+			var paisObt;
 
+			var request = new Request('http://localhost:8080/api/Provincias/getByLocalidad/' + LocalidadToProvincia);
+			//	$('#customerr').remove();
+
+			fetch(request).then(function (response) {
+				return response.text();
+			}).then(function (text) {
+				elemento = text;
+
+				myArr = JSON.parse(text);
+
+				prov = {id: myArr.id, nombre: myArr.nombre};
+				console.log(prov);
+
+				var provinciaDefinida = document.getElementById("primerProvincia");
+				provinciaDefinida.value = prov.id;
+				provinciaDefinida.text = prov.nombre;
+
+
+
+
+				request = new Request('http://localhost:8080/api/paises/' + prov.id);
 				fetch(request).then(function (response) {
 					return response.text();
 				}).then(function (text) {
 					elemento = text;
 
-					myArr = JSON.parse(text);					
-					
-					 prov = { id:myArr.id , nombre: myArr.nombre  };
-					console.log(prov);
-					
-					var provinciaDefinida = document.getElementById("primerProvincia");
-					provinciaDefinida.value = prov.id;
-					provinciaDefinida.text = prov.nombre;
-					
-					
-					
-					
-					request = new Request('http://localhost:8080/api/paises/' + prov.id);
-				fetch(request).then(function (response) {
-					return response.text();
-				}).then(function (text) {
-					elemento = text;
-
-					myArr = JSON.parse(text);		
-					 paisObt = { id:myArr.id , nombre: myArr.nombre };
+					myArr = JSON.parse(text);
+					paisObt = {id: myArr.id, nombre: myArr.nombre};
 					console.log(paisObt);
-					
+
 					var PaisDefinido = document.getElementById("primerPais");
 					PaisDefinido.value = paisObt.id;
 					PaisDefinido.text = paisObt.nombre;
-					
-						
-					
-	}
+
+
+
+				}
 				);
-					});
-					
-				console.log(paisObt);
-				console.log(prov);
+			});
+
+			console.log(paisObt);
+			console.log(prov);
 
 			var provinciaSeleccionada;
 			var localidadSeleccionada;
@@ -216,12 +217,12 @@
 				var tipoContactoo = tipoContactoSeleccionado;
 				//var tecnologia = tecnologiaSeleccionada;
 				var signoo = signoSeleccionada;
-				if(signoo == null){
-					signoo =  document.getElementById("signo").value.id;
+				if (signoo == null) {
+					signoo = document.getElementById("signo").value.id;
 				}
 				//var provincia = document.getElementById("provincia").value
 
-			//	var nacimientoModificado = nacimiento.split("/").reverse().join("-");
+				//	var nacimientoModificado = nacimiento.split("/").reverse().join("-");
 				const nacimientoModificado = new Date(nacimiento);
 				let tipoContacto = {id: tipoContactoSeleccionado};
 				let tecnologia = {id: tecnologiaSeleccionada};
@@ -255,8 +256,8 @@
 
 			function getComboA(selectObject) {
 				var value = selectObject.value;
-				
-				
+
+
 
 				console.log(selectObject);
 				$("#customerNameListProvincia > option").each(function () {
@@ -270,13 +271,13 @@
 				var provinciaDefinida = document.getElementById("primerProvincia");
 				provinciaDefinida.value = "";
 				provinciaDefinida.text = "";
-				
-					var localidadDefinida = document.getElementById("localidad");
+
+				var localidadDefinida = document.getElementById("localidad");
 				localidadDefinida.value = "";
 				localidadDefinida.text = "";
-				
+
 				//customerNameListProvincia
-				
+
 				var request = new Request('http://localhost:8080/api/Provincias/' + value);
 				//	$('#customerr').remove();
 
@@ -301,11 +302,11 @@
 
 
 				provinciaSeleccionada = value;
-				
+
 
 				console.log(provinciaSeleccionada);
-				
-					$("#customerNameListLocalidad > option").each(function () {
+
+				$("#customerNameListLocalidad > option").each(function () {
 					$("#customerNameListLocalidad option[value='" + value + "']").remove();
 				});
 

@@ -125,15 +125,12 @@ public class PersonaController {
 		PersonaDTO persona = personaService.getById(id);
 		personaService.delete(persona);
 
-		return "index";
+		return "redirect:/";
 	}
 	
 	@RequestMapping("/actualizar/{id}")
 	public String actualizar(@PathVariable("id") Long id, Model model) {
 		
-		//PersonaDTO persona = personaService.getById(id);
-		//persona.setDomicilio(model.)
-		//personaService.saveOrUpdate(persona);
 
 		return "/editar/{" + id + "}";
 	}
@@ -149,8 +146,6 @@ public class PersonaController {
 
 		// String selectedCity= request.getParameter("nameOfCity");
 		model.addAttribute("personaje", "personaje");
-		
-		
 
 		return "prueba";
 	}
@@ -162,23 +157,15 @@ public class PersonaController {
 		return "report/ventas/download?tipo=PDF";
 	}
 	
-	
-	
-	public  void mostrarReporteTecnologiaAscendente() throws SQLException, JRException {
-		// TODO Auto-generated method stub
-		Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/agenda", "postgres", "prueba");
-		String sql = "select  count(idtecnologia)*100/(select count(*) from persona) as resultado, tecnologia.nombre\r\n"
-				+ "from persona, tecnologia where persona.idtecnologia = tecnologia.id group by tecnologia.nombre order by\r\n"
-				+ "tecnologia.nombre asc";
-		JasperDesign jdesign = JRXmlLoader.load("src\\main\\java\\com\\ungs\\agenda\\reportes\\TecnologiaAscendente.jrxml");
-		JRDesignQuery update = new JRDesignQuery();
-		update.setText(sql);
-		jdesign.setQuery(update);
-		JasperReport jreport = JasperCompileManager.compileReport(jdesign);
-		JasperPrint print = JasperFillManager.fillReport(jreport, null, con);
-		JasperViewer.viewReport(print, false);
-
+	@RequestMapping("/Reportes")
+	public String reportes(Model model) throws SQLException, JRException {
+		
+		return "Reportes";
 	}
+	
+	
+	
+	
 
 
 }

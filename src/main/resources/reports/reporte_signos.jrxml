@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporte_signos" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="32142de8-65dd-4026-b4d9-f95a4d37c7a2">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Adapter agenda"/>
+	<subDataset name="lista_signos" uuid="7e5f7b36-da09-4682-b66f-db03408436a7">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Adapter agenda"/>
+		<queryString language="SQL">
+			<![CDATA[select nombre from signozodiaco]]>
+		</queryString>
+		<field name="nombre" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="nombre"/>
+			<property name="com.jaspersoft.studio.field.label" value="nombre"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="signozodiaco"/>
+		</field>
+		<group name="nombre">
+			<groupExpression><![CDATA[$F{nombre}]]></groupExpression>
+		</group>
+	</subDataset>
+	<queryString language="SQL">
+		<![CDATA[select count(idsignozodiaco)*100/(select count(*) from persona) as resultado, 
+	   signozodiaco.nombre
+from persona, signozodiaco
+where persona.idsignozodiaco = signozodiaco.id 
+group by signozodiaco.nombre 
+order by signozodiaco.nombre desc]]>
+	</queryString>
+	<field name="resultado" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="resultado"/>
+		<property name="com.jaspersoft.studio.field.label" value="resultado"/>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="signozodiaco"/>
+	</field>
+	<group name="resultado">
+		<groupExpression><![CDATA[$F{resultado}]]></groupExpression>
+	</group>
+	<group name="nombre">
+		<groupExpression><![CDATA[$F{nombre}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="800" height="79" uuid="60f06148-9187-4a81-9cf5-2e82f16d20d1"/>
+				<box>
+					<pen lineWidth="2.25"/>
+					<topPen lineWidth="2.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="2.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="2.25" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="2.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Porcentaje de personas por signo del zodiaco]]></text>
+			</staticText>
+		</band>
+	</title>
+	<summary>
+		<band height="467" splitType="Stretch">
+			<pieChart>
+				<chart evaluationTime="Report">
+					<reportElement x="0" y="90" width="460" height="360" uuid="6eda1e9f-e8f4-497b-b8c0-6d8aa69e3e7f"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<dataset resetType="Report"/>
+					<keyExpression><![CDATA[$F{nombre}]]></keyExpression>
+					<valueExpression><![CDATA[$F{resultado}]]></valueExpression>
+					<labelExpression><![CDATA[$F{resultado} + " %" + " (" + $F{nombre} + ")"]]></labelExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+			<staticText>
+				<reportElement x="0" y="30" width="90" height="30" uuid="f2e45b1a-dcb3-4692-9d00-385fe612a356"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Fecha reporte:]]></text>
+			</staticText>
+			<textField pattern="MMM d, yyyy h:mm:ss a">
+				<reportElement x="90" y="30" width="150" height="30" uuid="dcf09477-68ef-4811-8342-c57a58816eb3"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="560" y="80" width="120" height="30" uuid="740710a8-52e5-493c-8f02-a4919bf351ba"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Signos del zodiaco]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement x="560" y="110" width="120" height="30" uuid="1b4118f9-0f98-49da-beef-8c654f9b23fd"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="lista_signos" uuid="733db9c9-9e1c-456f-be09-54826a342a14">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="30" width="120">
+						<textField>
+							<reportElement x="0" y="0" width="100" height="30" uuid="4d58f7c1-fceb-4edb-9363-0443cc722e9f"/>
+							<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>

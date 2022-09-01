@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ungs.agenda.dto.PersonaDTO;
+import com.ungs.agenda.mapper.ModelMapper;
 import com.ungs.agenda.service.IPersonaService;
 
 @RestController
@@ -22,6 +23,9 @@ public class PersonaApiController {
 	
 	@Autowired
 	private IPersonaService personaService;
+	
+	@Autowired
+	private ModelMapper mapper;
 
 	 @PostMapping("/save")
 	 public void savePersona(@RequestBody PersonaDTO persona) {
@@ -38,10 +42,12 @@ public class PersonaApiController {
 		 
 		 PersonaDTO personaExistente = personaService.getById(id);
 		 System.out.println(personaExistente.getNombre());
-		 
+		
 		 if (personaExistente != null) {
 			
-			 personaExistente.setNombre(persona.getNombre());
+			 personaExistente = persona;
+			 
+			 
 		}
 		 
 		 
