@@ -41,13 +41,13 @@ public class PersonaApiController {
 	 public void updatePersona(@RequestBody PersonaDTO persona, Long id) {
 		 
 		 PersonaDTO personaExistente = personaService.getById(id);
-		 System.out.println(personaExistente.getNombre());
 		
 		 if (personaExistente != null) {
 			
 			 personaExistente = persona;
+			 personaExistente.setId(id);
 			 
-			 
+			 System.out.println(personaExistente);
 		}
 		 
 		 

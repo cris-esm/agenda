@@ -134,7 +134,6 @@
 
 		<script>
 			var LocalidadToProvincia = document.getElementById("customerNameListLocalidad").value;
-			console.log(LocalidadToProvincia);
 			var prov;
 			var paisObt;
 
@@ -149,7 +148,6 @@
 				myArr = JSON.parse(text);
 
 				prov = {id: myArr.id, nombre: myArr.nombre};
-				console.log(prov);
 
 				var provinciaDefinida = document.getElementById("primerProvincia");
 				provinciaDefinida.value = prov.id;
@@ -166,7 +164,6 @@
 
 					myArr = JSON.parse(text);
 					paisObt = {id: myArr.id, nombre: myArr.nombre};
-					console.log(paisObt);
 
 					var PaisDefinido = document.getElementById("primerPais");
 					PaisDefinido.value = paisObt.id;
@@ -178,19 +175,17 @@
 				);
 			});
 
-			console.log(paisObt);
-			console.log(prov);
 
 			var provinciaSeleccionada;
 			var localidadSeleccionada;
 			var tecnologiaSeleccionada;
 			var signoSeleccionada;
 			var tipoContactoSeleccionado;
+			var paisSeleccionado;
 
 
 			function getLocalidad(selectObject) {
 				localidadSeleccionada = selectObject.value;
-				console.log(selectObject.value);
 
 			}
 
@@ -215,11 +210,21 @@
 				var pais = document.getElementById("pais").value;
 				var provincia = provinciaSeleccionada;
 				var tipoContactoo = tipoContactoSeleccionado;
-				//var tecnologia = tecnologiaSeleccionada;
-				var signoo = signoSeleccionada;
-				if (signoo == null) {
-					signoo = document.getElementById("signo").value.id;
-				}
+				var localcito = document.getElementById("localidad");
+				var provincita = document.getElementById("primerProvincia");
+				var tipoContactito = document.getElementById("tipoContacto");
+				var PaisDefinido = document.getElementById("primerPais");
+				var tecnologitica = document.getElementById("tecnologia");
+				var signito = document.getElementById("signo");
+
+				localidadSeleccionada = localidadSeleccionada != null ? localidadSeleccionada : localcito.value;
+				provinciaSeleccionada = provinciaSeleccionada != null ? provinciaSeleccionada : provincita.value;
+				pais = PaisDefinido.value != null ? PaisDefinido.value : paisSeleccionado;
+				tipoContactoSeleccionado = tipoContactoSeleccionado != null ? tipoContactoSeleccionado : tipoContactito.value;
+				tecnologiaSeleccionada = tecnologiaSeleccionada != null ? tecnologiaSeleccionada : tecnologitica.value;
+				signoSeleccionada = signoSeleccionada != null ? signoSeleccionada : signito.value;
+
+
 				//var provincia = document.getElementById("provincia").value
 
 				//	var nacimientoModificado = nacimiento.split("/").reverse().join("-");
@@ -234,32 +239,32 @@
 				};
 				let person = {
 					nombre: nombre, telefono: telefono, email: email, fechaNac: nacimientoModificado, domicilio,
-					pais: pais, provincia: provincia,
+					pais: pais, provincia: provinciaSeleccionada,
 					tipoContacto: tipoContacto, signoZodiaco: signoZodiaco, tecnologia: tecnologia
 				};
 
 
+				(async () => {
+					const rawResponse = await fetch('http://localhost:8080/api/Persona/update', {
+						method: 'POST',
+						headers: {
+							'Accept': 'application/json',
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify(person)
+					});
+					const content = await rawResponse.json();
 
-				fetch('http://localhost:8080/api/Persona/save', {
-					method: 'POST',
-					headers: {
-						'Accept': 'application/json, text/plain, */*',
-						'Content-Type': 'application/json'
-					},
-					body: JSON.stringify(person)
-				}).then(res => res.json())
-					.then(res => console.log(res));
-
-
+					console.log(content);
+				})();
 
 			}
 
 			function getComboA(selectObject) {
 				var value = selectObject.value;
+				paisSeleccionado = value;
 
 
-
-				console.log(selectObject);
 				$("#customerNameListProvincia > option").each(function () {
 					$("#customerNameListProvincia option[value='" + value + "']").remove();
 				});
@@ -287,14 +292,12 @@
 					elemento = text;
 
 					myArr = JSON.parse(text);
-					console.log(myArr);
 
 					var data = myArr;
 					for (var index = 0; index <= data.length - 1; index++) {
 						$('#customerNameListProvincia').append('<option value="' + data[index].id + '">' + data[index].nombre + '</option>');
 					}
 				});
-				console.log(value);
 			}
 
 			function getComboB(selectObject) {
@@ -304,7 +307,6 @@
 				provinciaSeleccionada = value;
 
 
-				console.log(provinciaSeleccionada);
 
 				$("#customerNameListLocalidad > option").each(function () {
 					$("#customerNameListLocalidad option[value='" + value + "']").remove();
@@ -319,15 +321,12 @@
 					elemento = text;
 
 					myArr = JSON.parse(text);
-					console.log(myArr);
 
 					var data = myArr;
-					console.log(data);
 					for (var index = 0; index <= data.length - 1; index++) {
 						$('#customerNameListLocalidad').append('<option value="' + data[index].id + '">' + data[index].nombre + '</option>');
 					}
 				});
-				console.log(value);
 			}
 
 
