@@ -32,6 +32,8 @@
 				<div class="nes-field">
 					<label for="name_field" style="color: white;">Nombre</label>
 					<input type="text" id="nombre" th:field="*{persona.nombre}" class="nes-input">
+					<input type="hidden" id="idPersona" th:field="*{persona.id}">
+
 				</div>
 				<div class="nes-field">
 					<label for="name_field" style="color: white;">Telefono</label>
@@ -216,6 +218,7 @@
 				var PaisDefinido = document.getElementById("primerPais");
 				var tecnologitica = document.getElementById("tecnologia");
 				var signito = document.getElementById("signo");
+				var id = document.getElementById("idPersona").value;
 
 				localidadSeleccionada = localidadSeleccionada != null ? localidadSeleccionada : localcito.value;
 				provinciaSeleccionada = provinciaSeleccionada != null ? provinciaSeleccionada : provincita.value;
@@ -238,25 +241,24 @@
 						departamento, localidad: localidad
 				};
 				let person = {
+					id: id,
 					nombre: nombre, telefono: telefono, email: email, fechaNac: nacimientoModificado, domicilio,
 					pais: pais, provincia: provinciaSeleccionada,
 					tipoContacto: tipoContacto, signoZodiaco: signoZodiaco, tecnologia: tecnologia
 				};
 
+				console.log(person);
+				console.log(localidad);
 
-				(async () => {
-					const rawResponse = await fetch('http://localhost:8080/api/Persona/update', {
-						method: 'POST',
-						headers: {
-							'Accept': 'application/json',
-							'Content-Type': 'application/json'
-						},
-						body: JSON.stringify(person)
-					});
-					const content = await rawResponse.json();
-
-					console.log(content);
-				})();
+				fetch('http://localhost:8080/api/Persona/update', {
+					method: 'POST',
+					headers: {
+						'Accept': 'application/json, text/plain, */*',
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(person)
+				}).then(res => res.json())
+					.then(res => console.log(res));
 
 			}
 
@@ -265,21 +267,32 @@
 				paisSeleccionado = value;
 
 
-				$("#customerNameListProvincia > option").each(function () {
+
+				$('#customerNameListProvincia')
+					.find('option')
+					.remove()
+					.end();
+
+				$('#customerNameListLocalidad')
+					.find('option')
+					.remove()
+					.end();
+
+
+				/*$("#customerNameListProvincia > option").each(function () {
 					$("#customerNameListProvincia option[value='" + value + "']").remove();
 				});
 
 				$("#customerNameListLocalidad > option").each(function () {
 					$("#customerNameListLocalidad option[value='" + value + "']").remove();
-				});
+				});*/
 
-				var provinciaDefinida = document.getElementById("primerProvincia");
-				provinciaDefinida.value = "";
-				provinciaDefinida.text = "";
 
-				var localidadDefinida = document.getElementById("localidad");
-				localidadDefinida.value = "";
-				localidadDefinida.text = "";
+				$('#customerNameListProvincia').append($('<option>', {
+					value: 0,
+					text: ''
+				}));
+
 
 				//customerNameListProvincia
 
@@ -294,9 +307,15 @@
 					myArr = JSON.parse(text);
 
 					var data = myArr;
-					for (var index = 0; index <= data.length - 1; index++) {
-						$('#customerNameListProvincia').append('<option value="' + data[index].id + '">' + data[index].nombre + '</option>');
-					}
+					console.log(data);
+
+					$.each(data, function (i, dat) {
+						$('#customerNameListProvincia').append($('<option>', {
+							value: dat.id,
+							text: dat.nombre
+						}));
+					});
+
 				});
 			}
 
@@ -308,12 +327,22 @@
 
 
 
-				$("#customerNameListLocalidad > option").each(function () {
-					$("#customerNameListLocalidad option[value='" + value + "']").remove();
-				});
+				$('#customerNameListLocalidad')
+					.find('option')
+					.remove()
+					.end();
+
+
+
+				$('#customerNameListLocalidad').append($('<option>', {
+					value: 0,
+					text: ''
+				}));
 
 				var request = new Request('http://localhost:8080/api/Localidades/' + value);
 				//	$('#customerr').remove();
+
+				console.log(request);
 
 				fetch(request).then(function (response) {
 					return response.text();
@@ -323,9 +352,14 @@
 					myArr = JSON.parse(text);
 
 					var data = myArr;
-					for (var index = 0; index <= data.length - 1; index++) {
-						$('#customerNameListLocalidad').append('<option value="' + data[index].id + '">' + data[index].nombre + '</option>');
-					}
+					console.log(data);
+
+					$.each(data, function (i, dat) {
+						$('#customerNameListLocalidad').append($('<option>', {
+							value: dat.id,
+							text: dat.nombre
+						}));
+					});
 				});
 			}
 

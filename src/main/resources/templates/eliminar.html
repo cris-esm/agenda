@@ -10,7 +10,7 @@
 
 
 
-<!-- Bootstrap CSS -->
+	<!-- Bootstrap CSS -->
 
 	<link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}">
 	<link th:href="@{/css/index.css}" rel="stylesheet" />
@@ -23,21 +23,22 @@
 
 </head>
 
-<body style="background-image:url(../static/img/mario.jpg) no-repeat center center fixed;">
+<body id="tristeMario" >
+
 	<body>
-		<div class="container">
+		<div class="container" style="position: relative;top:400px;left: -50px;">
 			<br><br><br>
-			<h2 style="text-align: center;color:aliceblue">¿ESTA SEGURO QUE DESEA ELIMINAR A <span th:text="${persona.nombre}" style="color: white;font-size: 30px;"> Nombre </span>?</h2>
+			<h2 style="text-align: center;color:aliceblue">¿ESTA SEGURO QUE DESEA ELIMINAR A <span
+					th:text="${persona.nombre}" style="color: white;font-size: 30px;"> Nombre </span>?</h2>
 			<div>
-			<br>
-			<a style="position: relative;left:45%;" class="btn btn-primary" th:href="@{/eliminar/confirmacion/} + ${id}"> SI </a>
-			<a style="position: relative;left:50%;" class="btn btn-danger" th:href="@{/}"> NO </a>
+				<br>
+				<a style="position: relative;left:45%;" class="btn btn-primary"
+					th:href="@{/eliminar/confirmacion/} + ${id}"> SI </a>
+				<a style="position: relative;left:50%;" class="btn btn-danger" th:href="@{/}"> NO </a>
 			</div>
 		</div>
-
-
-	
-
+		
+		
 	</body>
 
 </body>

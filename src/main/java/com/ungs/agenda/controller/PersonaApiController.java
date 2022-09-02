@@ -38,20 +38,14 @@ public class PersonaApiController {
 	 
 	 
 	 @PostMapping("/update")
-	 public void updatePersona(@RequestBody PersonaDTO persona, Long id) {
+	 public void updatePersona(@RequestBody PersonaDTO persona) {
 		 
-		 PersonaDTO personaExistente = personaService.getById(id);
+		 System.out.println(persona);
+
+		 System.out.println(persona.getId());
+		 
 		
-		 if (personaExistente != null) {
-			
-			 personaExistente = persona;
-			 personaExistente.setId(id);
-			 
-			 System.out.println(personaExistente);
-		}
-		 
-		 
-		 personaService.saveOrUpdate(personaExistente);
+		 personaService.saveOrUpdate(persona);
 	  }
 
 }

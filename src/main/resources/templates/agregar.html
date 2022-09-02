@@ -21,7 +21,7 @@
 </head>
 
 <body style="background-image:url(../static/img/mario.jpg) no-repeat center center fixed;">
-	<div class="container" style="text-align: center;">
+	<div class="container" style="text-align: center;top:250px;">
 
 
 		<br>
@@ -197,18 +197,39 @@
 				console.log(person);
 			}
 
-			function getComboA(selectObject) {
+		function getComboA(selectObject) {
 				var value = selectObject.value;
+				paisSeleccionado = value;
 
-				console.log(selectObject);
-				$("#customerNameListProvincia > option").each(function () {
+
+
+				$('#customerNameListProvincia')
+					.find('option')
+					.remove()
+					.end();
+
+				$('#customerNameListLocalidad')
+					.find('option')
+					.remove()
+					.end();
+
+
+				/*$("#customerNameListProvincia > option").each(function () {
 					$("#customerNameListProvincia option[value='" + value + "']").remove();
 				});
 
 				$("#customerNameListLocalidad > option").each(function () {
 					$("#customerNameListLocalidad option[value='" + value + "']").remove();
-				});
+				});*/
 
+
+				$('#customerNameListProvincia').append($('<option>', {
+					value: 0,
+					text: ''
+				}));
+
+
+				//customerNameListProvincia
 
 				var request = new Request('http://localhost:8080/api/Provincias/' + value);
 				//	$('#customerr').remove();
@@ -219,28 +240,44 @@
 					elemento = text;
 
 					myArr = JSON.parse(text);
-					console.log(myArr);
 
 					var data = myArr;
-					for (var index = 0; index <= data.length - 1; index++) {
-						$('#customerNameListProvincia').append('<option value="' + data[index].id + '">' + data[index].nombre + '</option>');
-					}
+					console.log(data);
+
+					$.each(data, function (i, dat) {
+						$('#customerNameListProvincia').append($('<option>', {
+							value: dat.id,
+							text: dat.nombre
+						}));
+					});
+
 				});
-				console.log(value);
 			}
 
 			function getComboB(selectObject) {
 				var value = selectObject.value;
-				
+
 
 				provinciaSeleccionada = value;
 
-				$("#customerNameListLocalidad > option").each(function () {
-					$("#customerNameListLocalidad option[value='" + value + "']").remove();
-				});
+
+
+				$('#customerNameListLocalidad')
+					.find('option')
+					.remove()
+					.end();
+
+
+
+				$('#customerNameListLocalidad').append($('<option>', {
+					value: 0,
+					text: ''
+				}));
 
 				var request = new Request('http://localhost:8080/api/Localidades/' + value);
 				//	$('#customerr').remove();
+
+				console.log(request);
 
 				fetch(request).then(function (response) {
 					return response.text();
@@ -248,14 +285,17 @@
 					elemento = text;
 
 					myArr = JSON.parse(text);
-					console.log(myArr);
 
 					var data = myArr;
-					for (var index = 0; index <= data.length - 1; index++) {
-						$('#customerNameListLocalidad').append('<option value="' + data[index].id + '">' + data[index].nombre + '</option>');
-					}
+					console.log(data);
+
+					$.each(data, function (i, dat) {
+						$('#customerNameListLocalidad').append($('<option>', {
+							value: dat.id,
+							text: dat.nombre
+						}));
+					});
 				});
-				console.log(value);
 			}
 
 
