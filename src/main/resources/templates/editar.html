@@ -19,54 +19,355 @@
 	<link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
 	<!-- solo estilo del núcleo -->
 	<link href="https://unpkg.com/nes.css/css/nes-core.min.css" rel="stylesheet" />
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
 <body style="background-image:url(../static/img/mario.jpg) no-repeat center center fixed;">
+	<div class="container" style="text-align: center;">
 
 
-	<body>
-		<div class="container">
+		<br>
+		<div class="container" style="position: relative;left: -60px;">
+			<div clas="persona" style="width: 300px;display:inline-block;">
+				<div class="nes-field">
+					<label for="name_field" style="color: white;">Nombre</label>
+					<input type="text" id="nombre" th:field="*{persona.nombre}" class="nes-input">
+					<input type="hidden" id="idPersona" th:field="*{persona.id}">
 
-
-
-			<div style="position: relative;left:15%;">
-
-				<table class="table table-striped " style="background-color: azure;width: 600px;">
-					<thead>
-						<tr>
-							<th scope="col">Nombre</th>
-							<th scope="col">Telefono</th>
-							<th scope="col">Email</th>
-							<th scope="col">sin valor</th>
-							<th scope="col">Acciones</th>
-						</tr>
-					</thead>
-					<tr th:each="persona : ${list}">
-						<td><span th:text="${persona.nombre}"> Nombre </span></td>
-						<br>
-						<td><span th:text="${persona.telefono}"> Telefono </span></td>
-						<br>
-						<td><span th:text="${persona.email}"> Email </span></td>
-						<br>
-						<td><span th:text="${persona.telefono}"> Telefono </span></td>
-						<br>
-						<td><a type="button" class="nes-btn is-success"> Confirmar </a>
-							
-						</td>
-
-					</tr>
-
-				</table>
+				</div>
+				<div class="nes-field">
+					<label for="name_field" style="color: white;">Telefono</label>
+					<input type="tel" id="telefono" th:field="*{persona.telefono}" class="nes-input">
+				</div>
+				<div class="nes-field">
+					<label for="name_field" style="color: white;">Email</label>
+					<input type="text" id="email" th:field="*{persona.email}" class="nes-input">
+				</div>
+				<div class="nes-field">
+					<label for="name_field" style="color: white;">Fecha Nacimiento</label>
+					<input type="text" id="nacimiento" th:field="*{persona.fechaNac}" class="nes-input">
+				</div>
 			</div>
-			
-			<div style="text-align: center;">
-			<a class="btn btn-primary" th:href="@{/}" style="position: relative;top:112px;left: 3%;">Volver</a>
+			<div class="datosDom" style="width: 300px;display:inline-block;">
+				<div class="nes-field">
+					<label for="name_field" style="color: white;">Calle</label>
+					<input type="text" id="calle" th:field="*{persona.domicilio.calle}" class="nes-input">
+				</div>
+				<div class="nes-field">
+					<label for="name_field" style="color: white;">Altura</label>
+					<input type="number" id="altura" th:field="*{persona.domicilio.altura}" class="nes-input">
+				</div>
+				<div class="nes-field">
+					<label for="name_field" style="color: white;">Piso</label>
+					<input type="text" id="piso" th:field="*{persona.domicilio.piso}" class="nes-input">
+				</div>
+				<div class="nes-field">
+					<label for="name_field" style="color: white;">Departamento</label>
+					<input type="text" id="departamento" th:field="*{persona.domicilio.departamento}" class="nes-input">
+				</div>
 			</div>
+			<div class="domicilio" style="width: 300px;display:inline-block;">
+				<label for="warning_select" style="color: white;">Pais</label>
+				<div class="nes-select is-warning">
+					<select id="customerNameList" name="customer" onchange="getComboA(this)">
+						<option id="primerPais" disabled selected hidden>Select...</option>
+						<option th:each="pais : ${paises}" th:value="${pais.id}" th:text="${pais.nombre}" id="pais">
+						</option>
+					</select>
+				</div>
+				<label for="warning_select" style="color: white;" name="provincia">Provincia</label>
+				<div class="nes-select is-warning">
+					<select id="customerNameListProvincia" name="customerr" onchange="getComboB(this)">
+						<option value="" id="primerProvincia" disabled selected hidden>Select...</option>
+						<option id="provincia"></option>
+					</select>
+				</div>
+				<label for="warning_select" style="color: white;">Localidad</label>
+				<div class="nes-select is-warning">
+					<select id="customerNameListLocalidad" name="customerrr" onchange="getLocalidad(this)">
+						<option th:value="*{persona.domicilio.localidad.id}"
+							th:text="*{persona.domicilio.localidad.nombre}" disabled id="localidad" selected hidden>
+							Select...</option>
+
+					</select>
+				</div>
 
 
-	</body>
+			</div>
+			<div style="position: relative;width: 300px;top:-290px;left: 1020px;">
+				<label for="warning_select" style="color: white;">Tecnologia Preferida</label>
+				<div class="nes-select is-warning">
+					<select required id="warning_select" onchange="getTecnologia(this)">
+						<option th:value="*{persona.tecnologia.id}" th:text="*{persona.tecnologia.nombre}" disabled
+							selected hidden>Select...</option>
+						<option th:each="tecnologia : ${tecnologias}" th:value="${tecnologia.id}"
+							th:text="${tecnologia.nombre}" id="tecnologia">To be</option>
+					</select>
+				</div>
+				<label for="warning_select" style="color: white;">Signo Zodiacal</label>
+				<div class="nes-select is-warning">
+					<select required id="warning_select" onchange="getSigno(this)">
+						<option th:value="*{persona.signoZodiaco.id}" th:text="*{persona.signoZodiaco.nombre}" disabled
+							selected hidden>Select...</option>
+						<option th:each="signo : ${signos}" th:value="${signo.id}" th:text="${signo.nombre}" id="signo">
+							To be</option>
+					</select>
+				</div>
+				<label for="warning_select" style="color: white;">Tipo Contacto</label>
+				<div class="nes-select is-warning">
+					<select required id="warning_select" onchange="getTipoContacto(this)">
+						<option th:value="*{persona.tipoContacto.id}" th:text="*{persona.tipoContacto.nombre}" disabled
+							selected hidden>Select...</option>
+						<option th:each="tipoContacto : ${tiposContacto}" th:value="${tipoContacto.id}"
+							th:text="${tipoContacto.nombre}" id="tipoContacto">Tipo Contacto</option>
+					</select>
+				</div>
+			</div>
+			<div class="botones" style="position: relative;left: -25%;bottom: 250px;">
+				<a class="btn btn-secondary" th:object="${Persona}" method="post"
+					style="position: relative;left:35%;top:112px;" th:action="@{/adduser}"
+					onclick="agregarPersona()">Actualizar
+					Persona</a><br>
+				<div style="position:relative;left: 35%;">
+					<a class="btn btn-primary" th:href="@{/}" style="position: relative;top:112px;">Volver</a>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			var LocalidadToProvincia = document.getElementById("customerNameListLocalidad").value;
+			var prov;
+			var paisObt;
+
+			var request = new Request('http://localhost:8080/api/Provincias/getByLocalidad/' + LocalidadToProvincia);
+			//	$('#customerr').remove();
+
+			fetch(request).then(function (response) {
+				return response.text();
+			}).then(function (text) {
+				elemento = text;
+
+				myArr = JSON.parse(text);
+
+				prov = {id: myArr.id, nombre: myArr.nombre};
+
+				var provinciaDefinida = document.getElementById("primerProvincia");
+				provinciaDefinida.value = prov.id;
+				provinciaDefinida.text = prov.nombre;
+
+
+
+
+				request = new Request('http://localhost:8080/api/paises/' + prov.id);
+				fetch(request).then(function (response) {
+					return response.text();
+				}).then(function (text) {
+					elemento = text;
+
+					myArr = JSON.parse(text);
+					paisObt = {id: myArr.id, nombre: myArr.nombre};
+
+					var PaisDefinido = document.getElementById("primerPais");
+					PaisDefinido.value = paisObt.id;
+					PaisDefinido.text = paisObt.nombre;
+
+
+
+				}
+				);
+			});
+
+
+			var provinciaSeleccionada;
+			var localidadSeleccionada;
+			var tecnologiaSeleccionada;
+			var signoSeleccionada;
+			var tipoContactoSeleccionado;
+			var paisSeleccionado;
+
+
+			function getLocalidad(selectObject) {
+				localidadSeleccionada = selectObject.value;
+
+			}
+
+			function getSigno(selectObject) {
+				signoSeleccionada = selectObject.value;
+			}
+			function getTipoContacto(selectObject) {
+				tipoContactoSeleccionado = selectObject.value;
+			}
+			function getTecnologia(selectObject) {
+				tecnologiaSeleccionada = selectObject.value;
+			}
+			function agregarPersona() {
+				var nombre = document.getElementById("nombre").value;
+				var telefono = document.getElementById("telefono").value;
+				var email = document.getElementById("email").value;
+				var nacimiento = document.getElementById("nacimiento").value;
+				var calle = document.getElementById("calle").value;
+				var altura = document.getElementById("altura").value;
+				var piso = document.getElementById("piso").value;
+				var departamento = document.getElementById("departamento").value;
+				var pais = document.getElementById("pais").value;
+				var provincia = provinciaSeleccionada;
+				var tipoContactoo = tipoContactoSeleccionado;
+				var localcito = document.getElementById("localidad");
+				var provincita = document.getElementById("primerProvincia");
+				var tipoContactito = document.getElementById("tipoContacto");
+				var PaisDefinido = document.getElementById("primerPais");
+				var tecnologitica = document.getElementById("tecnologia");
+				var signito = document.getElementById("signo");
+				var id = document.getElementById("idPersona").value;
+
+				localidadSeleccionada = localidadSeleccionada != null ? localidadSeleccionada : localcito.value;
+				provinciaSeleccionada = provinciaSeleccionada != null ? provinciaSeleccionada : provincita.value;
+				pais = PaisDefinido.value != null ? PaisDefinido.value : paisSeleccionado;
+				tipoContactoSeleccionado = tipoContactoSeleccionado != null ? tipoContactoSeleccionado : tipoContactito.value;
+				tecnologiaSeleccionada = tecnologiaSeleccionada != null ? tecnologiaSeleccionada : tecnologitica.value;
+				signoSeleccionada = signoSeleccionada != null ? signoSeleccionada : signito.value;
+
+
+				//var provincia = document.getElementById("provincia").value
+
+				//	var nacimientoModificado = nacimiento.split("/").reverse().join("-");
+				const nacimientoModificado = new Date(nacimiento);
+				let tipoContacto = {id: tipoContactoSeleccionado};
+				let tecnologia = {id: tecnologiaSeleccionada};
+				let localidad = {id: localidadSeleccionada};
+				let signoZodiaco = {id: signoSeleccionada};
+				let domicilio = {
+					calle: calle, altura: altura, piso: piso, departamento:
+						departamento, localidad: localidad
+				};
+				let person = {
+					id: id,
+					nombre: nombre, telefono: telefono, email: email, fechaNac: nacimientoModificado, domicilio,
+					pais: pais, provincia: provinciaSeleccionada,
+					tipoContacto: tipoContacto, signoZodiaco: signoZodiaco, tecnologia: tecnologia
+				};
+
+				console.log(person);
+				console.log(localidad);
+
+				fetch('http://localhost:8080/api/Persona/update', {
+					method: 'POST',
+					headers: {
+						'Accept': 'application/json, text/plain, */*',
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(person)
+				}).then(res => res.json())
+					.then(res => console.log(res));
+
+			}
+
+			function getComboA(selectObject) {
+				var value = selectObject.value;
+				paisSeleccionado = value;
+
+
+
+				$('#customerNameListProvincia')
+					.find('option')
+					.remove()
+					.end();
+
+				$('#customerNameListLocalidad')
+					.find('option')
+					.remove()
+					.end();
+
+
+				/*$("#customerNameListProvincia > option").each(function () {
+					$("#customerNameListProvincia option[value='" + value + "']").remove();
+				});
+
+				$("#customerNameListLocalidad > option").each(function () {
+					$("#customerNameListLocalidad option[value='" + value + "']").remove();
+				});*/
+
+
+				$('#customerNameListProvincia').append($('<option>', {
+					value: 0,
+					text: ''
+				}));
+
+
+				//customerNameListProvincia
+
+				var request = new Request('http://localhost:8080/api/Provincias/' + value);
+				//	$('#customerr').remove();
+
+				fetch(request).then(function (response) {
+					return response.text();
+				}).then(function (text) {
+					elemento = text;
+
+					myArr = JSON.parse(text);
+
+					var data = myArr;
+					console.log(data);
+
+					$.each(data, function (i, dat) {
+						$('#customerNameListProvincia').append($('<option>', {
+							value: dat.id,
+							text: dat.nombre
+						}));
+					});
+
+				});
+			}
+
+			function getComboB(selectObject) {
+				var value = selectObject.value;
+
+
+				provinciaSeleccionada = value;
+
+
+
+				$('#customerNameListLocalidad')
+					.find('option')
+					.remove()
+					.end();
+
+
+
+				$('#customerNameListLocalidad').append($('<option>', {
+					value: 0,
+					text: ''
+				}));
+
+				var request = new Request('http://localhost:8080/api/Localidades/' + value);
+				//	$('#customerr').remove();
+
+				console.log(request);
+
+				fetch(request).then(function (response) {
+					return response.text();
+				}).then(function (text) {
+					elemento = text;
+
+					myArr = JSON.parse(text);
+
+					var data = myArr;
+					console.log(data);
+
+					$.each(data, function (i, dat) {
+						$('#customerNameListLocalidad').append($('<option>', {
+							value: dat.id,
+							text: dat.nombre
+						}));
+					});
+				});
+			}
+
+
+
+		</script>
 
 </body>
+
 
 </html>

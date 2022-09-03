@@ -1,6 +1,5 @@
 package com.ungs.agenda.dto;
 
-import com.ungs.agenda.model.Localidad;
 
 import lombok.Data;
 
@@ -17,5 +16,5 @@ public class DomicilioDTO {
 	
 	private String departamento;
 	
-	private Localidad localidad;
+	private LocalidadDTO localidad;
 }

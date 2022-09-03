@@ -16,35 +16,45 @@
 	<!-- solo estilo del núcleo -->
 	<link href="https://unpkg.com/nes.css/css/nes-core.min.css" rel="stylesheet" />
 
+	<!-- solo estilo del núcleo -->
+	<link href="https://unpkg.com/nes.css/css/nes-core.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 </head>
 
 <body>
 
-<div class="container">
-	<section style="position:relative;left: 27%;">
-		<section class="message-list">
-			<section class="message -left">
-				<i class="snes-jp-logo"></i>
-				<!-- Balloon -->
-				<div class="nes-balloon from-left">
-					<p style="font-family:ner">Bienvenido a la agenda</p>
-				</div>
-				<i class="nes-pokeball" style="position: relative;top:30px"></i>
+	<div class="container">
+		<section style="position:relative;left: 27%;">
+			<section class="message-list">
+				<section class="message -left">
+					<i class="snes-jp-logo"></i>
+					<!-- Balloon -->
+					<div class="nes-balloon from-left">
+						<p style="font-family:ner">Bienvenido a la agenda</p>
+					</div>
+					<i class="nes-pokeball" style="position: relative;top:30px"></i>
+				</section>
 			</section>
 		</section>
-	</section>
+	</div>
+	
+	<div style="text-align: center;position:relative;left: 30px;top:100px;">
+		<a th:href="@{/Reportes}" class="nes-btn is-success">reportes</a>
+	</div>
 
-
-
-	<br><br><br><br>
+	<br><br>
 	<div class="container">
-		<div style="position: relative;top:100px;left: 28%;">
+		<div style="position: relative;top:50px;left: 28%;">
 			<i class="nes-charmander" style="position: relative;top:20px"></i>
 			<a type="button" class="nes-btn is-warning" th:href="@{/agregar}">Agregar Persona</a>
-			<i class="nes-mario"  style="position: relative;top:20px"></i>
+			<i class="nes-mario" style="position: relative;top:20px"></i>
 		</div>
 
-		<div style="position: relative;left: 5%;top:50px;width: 1100px;top:100px;">
+		<div
+			style="position: relative;left: -10%;top:50px;width:1450px;top:50px;height: 90%;font-size: 10px;text-align: center;">
 			<div class="nes-table-responsive">
 				<table class="nes-table is-bordered is-centered">
 					<thead>
@@ -52,20 +62,30 @@
 							<th>Nombre</th>
 							<th>Telefono</th>
 							<th>Email</th>
-							<th>sin valor</th>
+							<th>Cumpleaños</th>
+							<th>Domicilio</th>
+							<th>Tipo Contacto</th>
+							<th>Signo Zodiacal</th>
+							<th>Tecnologia Preferida</th>
 							<th>Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="persona : ${list}">
+						<tr th:each="persona : ${personas}">
 							<td><span th:text="${persona.nombre}"> Nombre </span></td>
 							<td><span th:text="${persona.telefono}"> Telefono </span></td>
 							<td><span th:text="${persona.email}"> Email </span></td>
-							<td><span th:text="${persona.telefono}"> Telefono </span></td>
+							<td><span th:text="${persona.fechaNac}"> Cumpleaños </span></td>
+							<td><span
+									th:text="${persona.domicilio.calle + ' ' + persona.domicilio.altura + ', ' + persona.domicilio.localidad.nombre}">
+									Domicilio </span></td>
+							<td><span th:text="${persona.tipoContacto.nombre}"> Contacto </span></td>
+							<td><span th:text="${persona.signoZodiaco.nombre}"> Signo Zodiacal </span></td>
+							<td><span th:text="${persona.tecnologia.nombre}"> Tecnologia Preferida </span></td>
 							<td> <a type="button" th:href="@{/eliminar/} + ${persona.id}"
 									class="nes-btn is-error">eliminar</a>
 
-								<a th:href="@{/editar}" class="nes-btn is-success">editar</a>
+								<a th:href="@{/editar/{id}(id=${persona.id})}" class="nes-btn is-success">editar</a>
 							</td>
 						</tr>
 
@@ -74,8 +94,7 @@
 			</div>
 		</div>
 
-</div>
-
+	</div>
 
 </body>
 

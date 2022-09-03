@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TecnologiaAscendente" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d24735f2-71b4-4a34-a20a-1d5497ab25b6">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="net.sf.jasperreports.chart.pie.ignore.duplicated.key" value="true"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#BFCCD5">
+		<box>
+			<pen lineWidth="0.5" lineColor="#0E5E56"/>
+			<topPen lineWidth="0.5" lineColor="#0E5E56"/>
+			<leftPen lineWidth="0.5" lineColor="#0E5E56"/>
+			<bottomPen lineWidth="0.5" lineColor="#0E5E56"/>
+			<rightPen lineWidth="0.5" lineColor="#0E5E56"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#E6F5FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#0E5E56"/>
+			<topPen lineWidth="0.5" lineColor="#0E5E56"/>
+			<leftPen lineWidth="0.5" lineColor="#0E5E56"/>
+			<bottomPen lineWidth="0.5" lineColor="#0E5E56"/>
+			<rightPen lineWidth="0.5" lineColor="#0E5E56"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#0E5E56"/>
+			<topPen lineWidth="0.5" lineColor="#0E5E56"/>
+			<leftPen lineWidth="0.5" lineColor="#0E5E56"/>
+			<bottomPen lineWidth="0.5" lineColor="#0E5E56"/>
+			<rightPen lineWidth="0.5" lineColor="#0E5E56"/>
+		</box>
+	</style>
+	<subDataset name="tecnologiasAsc" uuid="97e94d41-e4e7-4692-b489-9ed523be57dd">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter"/>
+		<queryString language="SQL">
+			<![CDATA[select  count(idtecnologia)*100/(select count(*) from persona) as resultado, tecnologia.nombre
+from persona, tecnologia where persona.idtecnologia = tecnologia.id group by tecnologia.nombre order by
+tecnologia.nombre asc]]>
+		</queryString>
+		<field name="resultado" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="resultado"/>
+			<property name="com.jaspersoft.studio.field.label" value="resultado"/>
+		</field>
+		<field name="nombre" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="nombre"/>
+			<property name="com.jaspersoft.studio.field.label" value="nombre"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="tecnologia"/>
+		</field>
+		<group name="resultado">
+			<groupExpression><![CDATA[$F{resultado}]]></groupExpression>
+		</group>
+		<group name="nombre">
+			<groupExpression><![CDATA[$F{nombre}]]></groupExpression>
+		</group>
+	</subDataset>
+	<queryString language="SQL">
+		<![CDATA[select  count(idtecnologia)*100/(select count(*) from persona) as resultado, tecnologia.nombre
+from persona, tecnologia where persona.idtecnologia = tecnologia.id group by tecnologia.nombre order by
+tecnologia.nombre asc]]>
+	</queryString>
+	<field name="resultado" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="resultado"/>
+		<property name="com.jaspersoft.studio.field.label" value="resultado"/>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tecnologia"/>
+	</field>
+	<group name="resultado">
+		<groupExpression><![CDATA[$F{resultado}]]></groupExpression>
+	</group>
+	<group name="nombre">
+		<groupExpression><![CDATA[$F{nombre}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="53" splitType="Stretch">
+			<staticText>
+				<reportElement x="80" y="0" width="440" height="40" uuid="0701cf63-186e-4f3e-ba19-792a80843407"/>
+				<text><![CDATA[         REPORTE TECNOLOGIAS ORDENADAS DE MANERA ASCENDENTE]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="4" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="3" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="10" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="421" splitType="Stretch">
+			<componentElement>
+				<reportElement x="60" y="270" width="410" height="122" uuid="7a824649-e97d-48af-bc81-7c34a36ad3cb">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="tecnologiasAsc" uuid="ec4390f5-016e-4cdd-9783-399266c1f51e">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="200" uuid="b37818cc-071f-4aa4-9a80-fbeeb6eb2ebe">
+						<jr:tableHeader style="Table_TH" height="30"/>
+						<jr:tableFooter style="Table_TH" height="2"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="200" height="30" uuid="44a3f26a-fda1-4a06-8d95-abbb82516c43"/>
+								<text><![CDATA[Nombre de la Tecnologia]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="200" height="30" uuid="6ddc3bb6-640f-4aed-9e92-30238ad08b15"/>
+								<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="223" uuid="54d02199-d963-4246-b24b-62935e5668eb">
+						<jr:tableHeader style="Table_TH" height="30"/>
+						<jr:tableFooter style="Table_TH" height="2"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="223" height="30" uuid="7b9fbea9-8916-40e5-a13d-2d145144ac98"/>
+								<text><![CDATA[Porcentaje]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="223" height="30" uuid="118cd837-bbe9-43dd-bf0a-46fc0ae462f0"/>
+								<textFieldExpression><![CDATA[$F{resultado} + " %"]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<pieChart>
+				<chart evaluationTime="Report">
+					<reportElement x="20" y="-10" width="520" height="200" uuid="408f381f-5a02-40c0-b0b2-f6d0e939f871"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<dataset resetType="Report"/>
+					<keyExpression><![CDATA[$F{nombre}]]></keyExpression>
+					<valueExpression><![CDATA[$F{resultado}]]></valueExpression>
+					<labelExpression><![CDATA[$F{resultado} + " %" + " (" + $F{nombre} + ")"]]></labelExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+			<staticText>
+				<reportElement x="140" y="240" width="319" height="30" uuid="8afb94af-3e3f-416a-af0e-881924b53672"/>
+				<text><![CDATA[Podemos ver los porcentajes tambien en tablas]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>
