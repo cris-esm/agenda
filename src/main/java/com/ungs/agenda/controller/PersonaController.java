@@ -61,8 +61,6 @@ public class PersonaController {
 
 		PersonaDTO persona = personaService.getById(id);
 		paisService.getProvincias(id);
-		//provinciaService.getById(id)
-	//	persona.getDomicilio().getLocalidad().get
 		model.addAttribute("paises", paisService.getAll());
 		model.addAttribute("tiposContacto", tipoContactoService.getAll());
 		model.addAttribute("tecnologias", tecnologiaService.getAll());
@@ -96,7 +94,6 @@ public class PersonaController {
 	@RequestMapping(value = { "/sendPais" }, method = RequestMethod.POST)
 	public String messageCenterHome(Model model) {
 		
-		// String selectedCity= request.getParameter("nameOfCity");
 		model.addAttribute("personaje", "personaje");
 
 		return "prueba";
