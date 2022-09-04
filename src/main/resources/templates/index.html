@@ -6,7 +6,6 @@
 	<title>Personas</title>
 
 	<!-- Bootstrap CSS -->
-
 	<link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}">
 	<link href="../static/css/index.css" rel="stylesheet" th:href="@{/css/index.css}" />
 
@@ -16,35 +15,43 @@
 	<!-- solo estilo del núcleo -->
 	<link href="https://unpkg.com/nes.css/css/nes-core.min.css" rel="stylesheet" />
 
+	<!-- solo estilo del núcleo -->
+	<link href="https://unpkg.com/nes.css/css/nes-core.min.css" rel="stylesheet" />
+
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 </head>
 
 <body>
-
-<div class="container">
-	<section style="position:relative;left: 27%;">
-		<section class="message-list">
-			<section class="message -left">
-				<i class="snes-jp-logo"></i>
-				<!-- Balloon -->
-				<div class="nes-balloon from-left">
-					<p style="font-family:ner">Bienvenido a la agenda</p>
-				</div>
-				<i class="nes-pokeball" style="position: relative;top:30px"></i>
+	<div class="container">
+		<section style="position:relative; left: 25%;">
+			<section class="message-list">
+				<section class="message -left">
+					<i class="snes-jp-logo" style="position: relative;top:10px"></i>
+					<div class="nes-balloon from-left">
+						<p style="font-family:ner">Bienvenido a la agenda</p>
+					</div>
+					<i class="nes-pokeball" style="position: relative;top:32px"></i>
+				</section>
 			</section>
 		</section>
-	</section>
+	</div>
 
+	<div style="text-align: center; position:relative; top:40px;">
+		<a th:href="@{/Reportes}" class="nes-btn is-success">reportes</a>
+	</div>
 
-
-	<br><br><br><br>
 	<div class="container">
-		<div style="position: relative;top:100px;left: 28%;">
+		<div style="position: relative;top:50px;left: 26%;">
 			<i class="nes-charmander" style="position: relative;top:20px"></i>
 			<a type="button" class="nes-btn is-warning" th:href="@{/agregar}">Agregar Persona</a>
-			<i class="nes-mario"  style="position: relative;top:20px"></i>
+			<i class="nes-mario" style="position: relative;top:20px"></i>
 		</div>
 
-		<div style="position: relative;left: 5%;top:50px;width: 1100px;top:100px;">
+		<div
+			style="position: relative;top:50px;width:1200px;top:50px;height: 90%;font-size: 8px;text-align: center;">
 			<div class="nes-table-responsive">
 				<table class="nes-table is-bordered is-centered">
 					<thead>
@@ -52,31 +59,53 @@
 							<th>Nombre</th>
 							<th>Telefono</th>
 							<th>Email</th>
-							<th>sin valor</th>
+							<th>Cumpleaños</th>
+							<th>Domicilio</th>
+							<th>Tipo Contacto</th>
+							<th>Signo Zodiacal</th>
+							<th>Tecnologia Preferida</th>
 							<th>Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="persona : ${list}">
+						<tr th:each="persona : ${listPersonas}">
 							<td><span th:text="${persona.nombre}"> Nombre </span></td>
 							<td><span th:text="${persona.telefono}"> Telefono </span></td>
 							<td><span th:text="${persona.email}"> Email </span></td>
-							<td><span th:text="${persona.telefono}"> Telefono </span></td>
+							<td><span th:text="${persona.fechaNac}"> Cumpleaños </span></td>
+							<td><span
+									th:text="${persona?.domicilio?.calle + ' ' + persona.domicilio?.altura + ', ' + persona.domicilio?.localidad?.nombre}">
+									Domicilio </span></td>
+							<td><span th:text="${persona?.tipoContacto?.nombre}"> Contacto </span></td>
+							<td><span th:text="${persona?.signoZodiaco?.nombre}"> Signo Zodiacal </span></td>
+							<td><span th:text="${persona?.tecnologia?.nombre}"> Tecnologia Preferida </span></td>
+
 							<td> <a type="button" th:href="@{/eliminar/} + ${persona.id}"
 									class="nes-btn is-error">eliminar</a>
-
-								<a th:href="@{/editar}" class="nes-btn is-success">editar</a>
+								<a th:href="@{/editar/{id}(id=${persona.id})}" class="nes-btn is-success">editar</a>
 							</td>
 						</tr>
-
 					</tbody>
 				</table>
+				<div th:if="${totalPages > 1}" style="color:white">
+					<div class="row">
+						<div class="col-sm-2" style="font-size: 14px;">
+							Pagina: [[${currentPage}]] - [[${totalPages}]]
+						</div>
+				
+						<div class="col-sm-2" style="font-size: 14px;color:white">
+							<a th:if="${currentPage > 1}" th:href="@{'/page/' + ${currentPage - 1}}">Anterior</a>
+							<span th:unless="${currentPage > 1}">Anterior</span>
+						</div>
+						<div class="col-sm-2" style="font-size: 14px;color:white">
+							<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}}">Siguiente</a>
+							<span th:unless="${currentPage < totalPages}">Siguiente</span>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-
-</div>
-
-
+	</div>
 </body>
 
 </html>

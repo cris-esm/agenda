@@ -14,3 +14,9 @@ body{
  span,th,a{
 	font-family:ner ; 
 }
+
+#tristeMario{
+	background-image :  url(../img/juegoTriste.jpg);
+   	font-family:ner ; 
+   	background-size: 100%;
+}

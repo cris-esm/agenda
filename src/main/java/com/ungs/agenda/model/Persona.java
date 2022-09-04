@@ -47,7 +47,7 @@ public class Persona {
     @ManyToOne
     @JoinColumn(name="idtipocontacto")
 	private TipoContacto tipoContacto;
-    
+
     @ManyToOne
     @JoinColumn(name="idsignozodiaco")
 	private SignoZodiaco signoZodiaco;
