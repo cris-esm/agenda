@@ -2,8 +2,12 @@ package com.ungs.agenda.service.impl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.ungs.agenda.dto.DomicilioDTO;
@@ -50,5 +54,17 @@ public class PersonaServiceImpl implements IPersonaService {
 		return persona.isPresent() ? mapper.toPersonaDTO(persona.get()) : null;
 	}
 
+	@Override
+	public Page<PersonaDTO> getPaginated(Integer pageNum, Integer pageSize) {
+		Pageable pageable = PageRequest.of(pageNum - 1, pageSize); 
+		Page<Persona> pagePersonas = this.personaRepo.findAll(pageable);
+		Page<PersonaDTO> pagePersonasDTO = pagePersonas.map(new Function<Persona, PersonaDTO>() {
+		    @Override
+		    public PersonaDTO apply(Persona persona) {
+		        return mapper.toPersonaDTO(persona);
+		    }
+		});
+		return pagePersonasDTO;
+	}
 
 }

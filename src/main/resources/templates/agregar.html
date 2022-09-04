@@ -120,7 +120,8 @@
 			</div>
 			<div class="botones" style="position: relative;left: -25%;bottom: 250px;">
 				<a class="btn btn-secondary" th:object="${Persona}" method="post"
-					style="position: relative;left:35%;top:112px;" th:action="@{/adduser}" onclick="agregarPersona()" >Agregar
+					style="position: relative;left:35%;top:112px;" th:action="@{/adduser}"
+					onclick="agregarPersona()">Agregar
 					Persona</a><br>
 				<div style="position:relative;left: 35%;">
 					<a class="btn btn-primary" th:href="@{/}" style="position: relative;top:112px;">Volver</a>
@@ -135,11 +136,8 @@
 			var signoSeleccionada;
 			var tipoContactoSeleccionado;
 
-
 			function getLocalidad(selectObject) {
 				localidadSeleccionada = selectObject.value;
-								console.log(selectObject.value);
-
 			}
 
 			function getSigno(selectObject) {
@@ -151,6 +149,7 @@
 			function getTecnologia(selectObject) {
 				tecnologiaSeleccionada = selectObject.value;
 			}
+
 			function agregarPersona() {
 				var nombre = document.getElementById("nombre").value;
 				var telefono = document.getElementById("telefono").value;
@@ -162,22 +161,31 @@
 				var departamento = document.getElementById("departamento").value;
 				var pais = document.getElementById("pais").value;
 				var provincia = provinciaSeleccionada;
-				var tipoContactoo = tipoContactoSeleccionado;
-				//var tecnologia = tecnologiaSeleccionada;
-				var signoo = signoSeleccionada;
-				//var provincia = document.getElementById("provincia").value
-				
-				
-				let tipoContacto = {id: tipoContactoSeleccionado };
-				let tecnologia = {id: tecnologiaSeleccionada };
+
+				let tipoContacto = {id: tipoContactoSeleccionado};
+				let tecnologia = {id: tecnologiaSeleccionada};
 				let localidad = {id: localidadSeleccionada};
 				let signoZodiaco = {id: signoSeleccionada};
-				let domicilio = {  calle: calle, altura: altura, piso: piso, departamento:
-				 departamento, localidad: localidad };
+
+				let domicilio = {
+					calle: calle,
+					altura: altura,
+					piso: piso,
+					departamento: departamento,
+					localidad: localidad
+				};
+
 				let person = {
-					nombre: nombre, telefono: telefono, email: email, fechaNac: nacimiento,domicilio,
-				 pais: pais, provincia: provincia,
-					 tipoContacto: tipoContacto, signoZodiaco: signoZodiaco, tecnologia: tecnologia
+					nombre: nombre,
+					telefono: telefono,
+					email: email,
+					fechaNac: nacimiento,
+					domicilio,
+					pais: pais,
+					provincia: provincia,
+					tipoContacto: tipoContacto,
+					signoZodiaco: signoZodiaco,
+					tecnologia: tecnologia
 				};
 
 				console.log(person);
@@ -197,11 +205,9 @@
 				console.log(person);
 			}
 
-		function getComboA(selectObject) {
+			function getComboA(selectObject) {
 				var value = selectObject.value;
 				paisSeleccionado = value;
-
-
 
 				$('#customerNameListProvincia')
 					.find('option')
@@ -213,7 +219,6 @@
 					.remove()
 					.end();
 
-
 				/*$("#customerNameListProvincia > option").each(function () {
 					$("#customerNameListProvincia option[value='" + value + "']").remove();
 				});
@@ -222,12 +227,10 @@
 					$("#customerNameListLocalidad option[value='" + value + "']").remove();
 				});*/
 
-
 				$('#customerNameListProvincia').append($('<option>', {
 					value: 0,
 					text: ''
 				}));
-
 
 				//customerNameListProvincia
 
@@ -257,17 +260,12 @@
 			function getComboB(selectObject) {
 				var value = selectObject.value;
 
-
 				provinciaSeleccionada = value;
-
-
 
 				$('#customerNameListLocalidad')
 					.find('option')
 					.remove()
 					.end();
-
-
 
 				$('#customerNameListLocalidad').append($('<option>', {
 					value: 0,
@@ -297,8 +295,6 @@
 					});
 				});
 			}
-
-
 
 		</script>
 

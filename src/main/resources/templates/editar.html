@@ -98,7 +98,7 @@
 				<label for="warning_select" style="color: white;">Tecnologia Preferida</label>
 				<div class="nes-select is-warning">
 					<select required id="warning_select" onchange="getTecnologia(this)">
-						<option th:value="*{persona.tecnologia.id}" th:text="*{persona.tecnologia.nombre}" disabled
+						<option th:value="*{persona?.tecnologia?.id}" th:text="*{persona?.tecnologia?.nombre}" disabled
 							selected hidden>Select...</option>
 						<option th:each="tecnologia : ${tecnologias}" th:value="${tecnologia.id}"
 							th:text="${tecnologia.nombre}" id="tecnologia">To be</option>
@@ -107,7 +107,7 @@
 				<label for="warning_select" style="color: white;">Signo Zodiacal</label>
 				<div class="nes-select is-warning">
 					<select required id="warning_select" onchange="getSigno(this)">
-						<option th:value="*{persona.signoZodiaco.id}" th:text="*{persona.signoZodiaco.nombre}" disabled
+						<option th:value="*{persona?.signoZodiaco?.id}" th:text="*{persona?.signoZodiaco?.nombre}" disabled
 							selected hidden>Select...</option>
 						<option th:each="signo : ${signos}" th:value="${signo.id}" th:text="${signo.nombre}" id="signo">
 							To be</option>
@@ -116,7 +116,7 @@
 				<label for="warning_select" style="color: white;">Tipo Contacto</label>
 				<div class="nes-select is-warning">
 					<select required id="warning_select" onchange="getTipoContacto(this)">
-						<option th:value="*{persona.tipoContacto.id}" th:text="*{persona.tipoContacto.nombre}" disabled
+						<option th:value="*{persona?.tipoContacto?.id}" th:text="*{persona?.tipoContacto?.nombre}" disabled
 							selected hidden>Select...</option>
 						<option th:each="tipoContacto : ${tiposContacto}" th:value="${tipoContacto.id}"
 							th:text="${tipoContacto.nombre}" id="tipoContacto">Tipo Contacto</option>

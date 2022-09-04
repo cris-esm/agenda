@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ungs.agenda.dto.LocalidadDTO;
-import com.ungs.agenda.dto.ProvinciaDTO;
-import com.ungs.agenda.service.ILocalidadService;
 import com.ungs.agenda.service.IProvinciaService;
 
 
@@ -19,9 +17,8 @@ import com.ungs.agenda.service.IProvinciaService;
 public class LocalidadController {
 
 	
-	 @Autowired private IProvinciaService provinciService;
-	 
-
+	@Autowired 
+	private IProvinciaService provinciService;
 
 	@GetMapping("/{id}")
 	public List<LocalidadDTO> obtenerLocalidadesId(@PathVariable Long id) {
@@ -29,9 +26,4 @@ public class LocalidadController {
 		return provinciService.getLocalidades(id);
 	}
 	
-	
-	
-	
-	
-
 }

@@ -1,39 +1,22 @@
 package com.ungs.agenda.controller;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ungs.agenda.dto.PersonaDTO;
-import com.ungs.agenda.model.Persona;
-import com.ungs.agenda.service.ILocalidadService;
 import com.ungs.agenda.service.IPaisService;
 import com.ungs.agenda.service.IPersonaService;
-import com.ungs.agenda.service.IProvinciaService;
 import com.ungs.agenda.service.ISignoZodiacoService;
 import com.ungs.agenda.service.ITecnologiaService;
 import com.ungs.agenda.service.ITipoContactoService;
-
-
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.design.JRDesignQuery;
-import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.engine.xml.JRXmlLoader;
-import net.sf.jasperreports.view.JasperViewer;
 
 
 @Controller
@@ -45,9 +28,6 @@ public class PersonaController {
 
 	@Autowired
 	private IPaisService paisService;
-	
-	@Autowired
-	private IProvinciaService provinciaService;
 
 	@Autowired
 	private ITipoContactoService tipoContactoService;
@@ -61,14 +41,8 @@ public class PersonaController {
 
 	@RequestMapping("/")
 	public String index(Model model)  {
-		model.addAttribute("personas", personaService.getAll());
-		
-		System.out.println(personaService.getAll());
-
-		return "index";
+		return getPaginated(1, model);
 	}
-
-	
 	
 	@RequestMapping("/agregar")
 	public String agregar(Model model) {
@@ -79,27 +53,13 @@ public class PersonaController {
 		model.addAttribute("tecnologias", tecnologiaService.getAll());
 		model.addAttribute("signos", signoZodiacoService.getAll());
 
-		
-
 		return "agregar";
-	}
-
-	@PostMapping("/adduser")
-	public String addUser(@ModelAttribute("Persona") PersonaDTO persona, Model model) {
-
-		System.out.println(persona);
-		System.out.println(model);
-
-		//personaService.saveOrUpdate(persona);
-
-		return "redirect:/";
 	}
 
 	@RequestMapping("/editar/{id}")
 	public String editar(@PathVariable("id") Long id, Model model) {
 
 		PersonaDTO persona = personaService.getById(id);
-		System.out.println(persona);
 		paisService.getProvincias(id);
 		//provinciaService.getById(id)
 	//	persona.getDomicilio().getLocalidad().get
@@ -130,41 +90,35 @@ public class PersonaController {
 	
 	@RequestMapping("/actualizar/{id}")
 	public String actualizar(@PathVariable("id") Long id, Model model) {
-		
-
 		return "/editar/{" + id + "}";
-	}
-
-	@RequestMapping("/prueba")
-	public String prueba(Model model) throws SQLException, JRException {
-		
-		return "prueba";
 	}
 
 	@RequestMapping(value = { "/sendPais" }, method = RequestMethod.POST)
 	public String messageCenterHome(Model model) {
-
+		
 		// String selectedCity= request.getParameter("nameOfCity");
 		model.addAttribute("personaje", "personaje");
 
 		return "prueba";
 	}
 	
-	
-	@RequestMapping("/report/ventas/download?tipo=PDF")
-	public String reporte(Model model) throws SQLException, JRException {
-		
-		return "report/ventas/download?tipo=PDF";
-	}
-	
 	@RequestMapping("/Reportes")
-	public String reportes(Model model) throws SQLException, JRException {
+	public String reportes(Model model)  {
 		
 		return "Reportes";
 	}
 	
-	
-	
+	@GetMapping("/page/{pageNumber}")
+	public String getPaginated(@PathVariable (value = "pageNumber") Integer pageNumber, Model model) {
+		Integer pageSize = 4;
+		Page<PersonaDTO> pagina = personaService.getPaginated(pageNumber, pageSize);
+		List<PersonaDTO> listaPersonasDTO = pagina.getContent();
+		model.addAttribute("currentPage", pageNumber);
+		model.addAttribute("totalPages", pagina.getTotalPages());
+		model.addAttribute("totalItems", pagina.getTotalElements());
+		model.addAttribute("listPersonas", listaPersonasDTO);
+		return "index";
+	}
 	
 
 
