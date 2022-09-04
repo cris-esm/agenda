@@ -107,8 +107,8 @@
 				<label for="warning_select" style="color: white;">Signo Zodiacal</label>
 				<div class="nes-select is-warning">
 					<select required id="warning_select" onchange="getSigno(this)">
-						<option th:value="*{persona?.signoZodiaco?.id}" th:text="*{persona?.signoZodiaco?.nombre}" disabled
-							selected hidden>Select...</option>
+						<option th:value="*{persona?.signoZodiaco?.id}" th:text="*{persona?.signoZodiaco?.nombre}"
+							disabled selected hidden>Select...</option>
 						<option th:each="signo : ${signos}" th:value="${signo.id}" th:text="${signo.nombre}" id="signo">
 							To be</option>
 					</select>
@@ -116,8 +116,8 @@
 				<label for="warning_select" style="color: white;">Tipo Contacto</label>
 				<div class="nes-select is-warning">
 					<select required id="warning_select" onchange="getTipoContacto(this)">
-						<option th:value="*{persona?.tipoContacto?.id}" th:text="*{persona?.tipoContacto?.nombre}" disabled
-							selected hidden>Select...</option>
+						<option th:value="*{persona?.tipoContacto?.id}" th:text="*{persona?.tipoContacto?.nombre}"
+							disabled selected hidden>Select...</option>
 						<option th:each="tipoContacto : ${tiposContacto}" th:value="${tipoContacto.id}"
 							th:text="${tipoContacto.nombre}" id="tipoContacto">Tipo Contacto</option>
 					</select>
@@ -140,7 +140,6 @@
 			var paisObt;
 
 			var request = new Request('http://localhost:8080/api/Provincias/getByLocalidad/' + LocalidadToProvincia);
-			//	$('#customerr').remove();
 
 			fetch(request).then(function (response) {
 				return response.text();
@@ -228,9 +227,6 @@
 				signoSeleccionada = signoSeleccionada != null ? signoSeleccionada : signito.value;
 
 
-				//var provincia = document.getElementById("provincia").value
-
-				//	var nacimientoModificado = nacimiento.split("/").reverse().join("-");
 				const nacimientoModificado = new Date(nacimiento);
 				let tipoContacto = {id: tipoContactoSeleccionado};
 				let tecnologia = {id: tecnologiaSeleccionada};
@@ -293,11 +289,7 @@
 					text: ''
 				}));
 
-
-				//customerNameListProvincia
-
 				var request = new Request('http://localhost:8080/api/Provincias/' + value);
-				//	$('#customerr').remove();
 
 				fetch(request).then(function (response) {
 					return response.text();
@@ -340,7 +332,6 @@
 				}));
 
 				var request = new Request('http://localhost:8080/api/Localidades/' + value);
-				//	$('#customerr').remove();
 
 				console.log(request);
 

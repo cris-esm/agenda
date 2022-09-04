@@ -45,10 +45,7 @@
 
 	<script>
 	
-	
-	
 	var request = new Request('http://localhost:8080/report/ventas/download?tipo=PDF');
-			//	$('#customerr').remove();
 
 			fetch(request).then(function (response) {
 				return response.text();
@@ -64,10 +61,6 @@
 				}
 			});
 			console.log(value);
-		
-	
-	
-	
 	
 	
 		function getComboA(selectObject) {
@@ -83,7 +76,6 @@
 
 
 			var request = new Request('http://localhost:8080/api/Provincias/' + value);
-			//	$('#customerr').remove();
 
 			fetch(request).then(function (response) {
 				return response.text();
@@ -110,7 +102,6 @@
 
 
 			var request = new Request('http://localhost:8080/api/Localidades/' + value);
-			//	$('#customerr').remove();
 
 			fetch(request).then(function (response) {
 				return response.text();
@@ -126,8 +117,6 @@
 			});
 			console.log(value);
 		}
-
-
 		
 		$(document).ready(function () {
 
@@ -148,11 +137,6 @@
 			});
 
 		});
-
-
-
-
-
 
 	</script>
 

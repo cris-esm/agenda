@@ -219,23 +219,14 @@
 					.remove()
 					.end();
 
-				/*$("#customerNameListProvincia > option").each(function () {
-					$("#customerNameListProvincia option[value='" + value + "']").remove();
-				});
-
-				$("#customerNameListLocalidad > option").each(function () {
-					$("#customerNameListLocalidad option[value='" + value + "']").remove();
-				});*/
 
 				$('#customerNameListProvincia').append($('<option>', {
 					value: 0,
 					text: ''
 				}));
 
-				//customerNameListProvincia
 
 				var request = new Request('http://localhost:8080/api/Provincias/' + value);
-				//	$('#customerr').remove();
 
 				fetch(request).then(function (response) {
 					return response.text();
@@ -273,7 +264,6 @@
 				}));
 
 				var request = new Request('http://localhost:8080/api/Localidades/' + value);
-				//	$('#customerr').remove();
 
 				console.log(request);
 
