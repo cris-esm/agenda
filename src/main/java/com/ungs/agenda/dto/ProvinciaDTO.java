@@ -12,4 +12,6 @@ public class ProvinciaDTO {
 	private String nombre;
 	
 	private List<LocalidadDTO> localidades;
+	
+	private PaisDTO pais;
 }

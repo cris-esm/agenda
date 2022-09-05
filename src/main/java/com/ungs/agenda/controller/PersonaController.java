@@ -105,6 +105,12 @@ public class PersonaController {
 		return "Reportes";
 	}
 	
+	@RequestMapping("/direcciones")
+	public String edicionDirecciones(Model model)  {
+		model.addAttribute("paises", paisService.getAll());
+		return "direcciones";
+	}
+	
 	@GetMapping("/page/{pageNumber}")
 	public String getPaginated(@PathVariable (value = "pageNumber") Integer pageNumber, Model model) {
 		Integer pageSize = 4;

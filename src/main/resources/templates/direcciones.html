@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>direcciones</title>
+
+	<!-- Bootstrap CSS -->
+
+	<link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}">
+	<link th:href="@{/css/index.css}" rel="stylesheet" />
+
+	<link href="https://unpkg.com/nes.css@2.2.0/css/nes.min.css" rel="stylesheet" />
+	<!-- último -->
+	<link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
+	<!-- solo estilo del núcleo -->
+	<link href="https://unpkg.com/nes.css/css/nes-core.min.css" rel="stylesheet" />
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</head>
+<br><br>
+<div class="container" style="position: relative;left: 5%;">
+
+	<body style="background-image:url(../static/img/mario.jpg) no-repeat center center fixed;">
+		<br><br><br>
+		<div class="container" style="position: relative;left: -60px;">
+			<div class="domicilio" style="width: 300px;display:inline-block;">
+				<br><br><br><br>
+				<div class="nes-field" style="position:relative; top:-80px;left: 347px;text-align: center;">
+					<label for="name_field" style="color: white;">Pais Nuevo</label>
+					<input type="text" id="paisNuevo" class="nes-input">
+				</div>
+				<div style="position:relative;left: 700px;top:-250px">
+					<a class="nes-btn is-success" th:href="@{/}" style="position: relative;top:118px;"
+						onclick="agregarPais()">Agregar</a>
+				</div>
+
+
+				<div style="position:relative;top:-120px;text-align: center;">
+					<label for="warning_select" style="color: white;text-align: center;">Pais</label>
+					<div class="nes-select is-warning" style="position:relative">
+						<select id="customerNameList" name="customer"  onchange="getPais(this)">
+							<option value="" disabled selected hidden>Select...</option>
+							<option th:each="pais : ${paises}" th:value="${pais.id}" th:text="${pais.nombre}"
+								id="paisProvincia">
+							</option>
+						</select>
+					</div>
+				</div>
+				<div class="nes-field" style="position:relative; top:-200px;left: 347px;text-align: center;">
+					<label for="name_field" style="color: white;">Provincia Nueva</label>
+					<input type="text" id="provinciaNueva" class="nes-input">
+				</div>
+				<div style="position:relative;left: 700px;top:-365px">
+					<a class="nes-btn is-success" onclick="agregarProvincia()" th:href="@{/}" style="position: relative;top:112px;">Agregar</a>
+				</div>
+
+
+				<div style="position:relative;top:-210px;text-align: center;">
+					<label for="warning_select" style="color: white;text-align: center;">Pais</label>
+					<div class="nes-select is-warning" style="position:relative">
+						<select id="customerNameList" name="customer" onchange="getComboA(this)">
+							<option value="" disabled selected hidden>Select...</option>
+							<option th:each="pais : ${paises}" th:value="${pais.id}" th:text="${pais.nombre}" id="pais">
+							</option>
+						</select>
+					</div>
+				</div>
+
+				<div style="position:relative;left: 350px;top:-300px;text-align: center;">
+					<label for="warning_select" style="color: white;" name="provincia">Provincia</label>
+					<div class="nes-select is-warning">
+						<select id="customerNameListProvincia" name="customerr" onchange="getComboB(this)">
+							<option value="" disabled selected hidden>Select...</option>
+							<option th:each="provincia : ${provincias}" th:value="${provincia.id}"
+								th:text="${provincia.nombre}" id="provincia"></option>
+
+						</select>
+
+					</div>
+				</div>
+				<div style="position:relative;left: 366px;top:-180px">
+					<div class="nes-field" style="position:relative; top:-200px;left: 330px;text-align: center;">
+						<label for="name_field" style="color: white;">Localidad Nueva</label>
+						<input type="text" id="LocalidadNueva" class="nes-input">
+					</div>
+				</div>
+
+				<div style="position:relative;left: 1050px;top:-545px">
+					<a class="nes-btn is-success" th:href="@{/}" style="position: relative;top:112px;">Agregar</a>
+				</div>
+			</div>
+		</div>
+	</body>
+
+	<script>
+		var provinciaSeleccionada;
+		var localidadSeleccionada;
+		var tecnologiaSeleccionada;
+		var signoSeleccionada;
+		var tipoContactoSeleccionado;
+		var paisProvincia;
+		
+		function getPais(selectObject){
+			paisProvincia = selectObject.value;
+		}
+
+		function getLocalidad(selectObject) {
+			localidadSeleccionada = selectObject.value;
+		}
+
+		function getSigno(selectObject) {
+			signoSeleccionada = selectObject.value;
+		}
+		function getTipoContacto(selectObject) {
+			tipoContactoSeleccionado = selectObject.value;
+		}
+		function getTecnologia(selectObject) {
+			tecnologiaSeleccionada = selectObject.value;
+		}
+
+		function agregarPersona() {
+			var pais = document.getElementById("pais").value;
+			var provincia = provinciaSeleccionada;
+
+			let localidad = {id: localidadSeleccionada};
+		}
+
+		function agregarPais() {
+			var paisNuevo = document.getElementById("paisNuevo").value;
+			if (paisNuevo != null && paisNuevo.length > 0) {
+
+				let pais = {nombre: paisNuevo};
+
+				fetch('http://localhost:8080/api/paises/save', {
+					method: 'POST',
+					headers: {
+						'Accept': 'application/json, text/plain, */*',
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(pais)
+				}).then(res => res.json())
+					.then(res => console.log(res));
+
+				console.log(person);
+			}
+		}
+		
+		function agregarProvincia(){
+			var provinciaNueva = document.getElementById("provinciaNueva").value;
+			if (provinciaNueva != null && provinciaNueva.length > 0 && paisProvincia != null 
+			&& paisProvincia.length > 0) {
+
+				let provincia = {nombre: provinciaNueva};
+				console.log(paisProvincia);
+
+				fetch('http://localhost:8080/api/Provincias/save/' + paisProvincia, {
+					method: 'POST',
+					headers: {
+						'Accept': 'application/json, text/plain, */*',
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(provincia)
+				}).then(res => res.json())
+					.then(res => console.log(res));
+
+				console.log(person);
+			}
+		}
+
+		function getComboA(selectObject) {
+			var value = selectObject.value;
+			paisSeleccionado = value;
+
+			$('#customerNameListProvincia')
+				.find('option')
+				.remove()
+				.end();
+
+			$('#customerNameListLocalidad')
+				.find('option')
+				.remove()
+				.end();
+
+
+			$('#customerNameListProvincia').append($('<option>', {
+				value: 0,
+				text: ''
+			}));
+
+
+			var request = new Request('http://localhost:8080/api/Provincias/' + value);
+
+			fetch(request).then(function (response) {
+				return response.text();
+			}).then(function (text) {
+				elemento = text;
+
+				myArr = JSON.parse(text);
+
+				var data = myArr;
+				console.log(data);
+
+				$.each(data, function (i, dat) {
+					$('#customerNameListProvincia').append($('<option>', {
+						value: dat.id,
+						text: dat.nombre
+					}));
+				});
+
+			});
+		}
+
+		function getComboB(selectObject) {
+			var value = selectObject.value;
+
+			provinciaSeleccionada = value;
+
+			$('#customerNameListLocalidad')
+				.find('option')
+				.remove()
+				.end();
+
+			$('#customerNameListLocalidad').append($('<option>', {
+				value: 0,
+				text: ''
+			}));
+
+			var request = new Request('http://localhost:8080/api/Localidades/' + value);
+
+			console.log(request);
+
+			fetch(request).then(function (response) {
+				return response.text();
+			}).then(function (text) {
+				elemento = text;
+
+				myArr = JSON.parse(text);
+
+				var data = myArr;
+				console.log(data);
+
+				$.each(data, function (i, dat) {
+					$('#customerNameListLocalidad').append($('<option>', {
+						value: dat.id,
+						text: dat.nombre
+					}));
+				});
+			});
+		}
+
+	</script>
+
+</html>
