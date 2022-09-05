@@ -13,5 +13,4 @@ public class ProvinciaDTO {
 	
 	private List<LocalidadDTO> localidades;
 	
-	private PaisDTO pais;
 }

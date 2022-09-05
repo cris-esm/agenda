@@ -48,8 +48,11 @@ public class ProvinciaServiceImpl implements IProvinciaService {
 	}
 
 	@Override
-	public void save(ProvinciaDTO provincia) {
+	public void save(ProvinciaDTO provincia, PaisDTO pais) {
 		Provincia provinciaDb = mapper.toProvincia(provincia);
+		Pais paisDb = mapper.toPais(pais);
+		provinciaDb.setPais(paisDb);
 		provinciaRepo.save(provinciaDb);		
+		
 	}
 }

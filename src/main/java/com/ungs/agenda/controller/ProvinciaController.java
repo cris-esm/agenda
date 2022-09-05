@@ -56,8 +56,7 @@ public class ProvinciaController {
 
 	public boolean guardarProvincia(ProvinciaDTO provincia, long id) {
 		PaisDTO pais = paisService.getPaisById(id);
-		provincia.setPais(pais);
-		provinciaService.save(provincia);
+		provinciaService.save(provincia,pais);
 		return false;
 	}
 

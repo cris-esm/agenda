@@ -9,6 +9,5 @@ public class LocalidadDTO {
 	
 	private String nombre;
 	
-	private ProvinciaDTO provincia;
 
 }

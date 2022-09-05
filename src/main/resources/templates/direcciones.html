@@ -88,7 +88,7 @@
 				</div>
 
 				<div style="position:relative;left: 1050px;top:-545px">
-					<a class="nes-btn is-success" th:href="@{/}" style="position: relative;top:112px;">Agregar</a>
+					<a class="nes-btn is-success" onclick="agregarLocalidad()"  th:href="@{/}" style="position: relative;top:112px;">Agregar</a>
 				</div>
 			</div>
 		</div>
@@ -101,6 +101,7 @@
 		var signoSeleccionada;
 		var tipoContactoSeleccionado;
 		var paisProvincia;
+		var provinciaLocalidad;
 		
 		function getPais(selectObject){
 			paisProvincia = selectObject.value;
@@ -169,6 +170,28 @@
 			}
 		}
 
+		function agregarLocalidad(){
+			var localidadNueva = document.getElementById("LocalidadNueva").value;
+			if (localidadNueva != null && localidadNueva.length > 0 && provinciaSeleccionada != null 
+			&& provinciaSeleccionada.length > 0) {
+
+				let localidad = {nombre: localidadNueva};
+				console.log(provinciaSeleccionada);
+
+				fetch('http://localhost:8080/api/Localidades/save/' + provinciaSeleccionada, {
+					method: 'POST',
+					headers: {
+						'Accept': 'application/json, text/plain, */*',
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(localidad)
+				}).then(res => res.json())
+					.then(res => console.log(res));
+
+				console.log(localidad);
+			}
+		}
+		
 		function getComboA(selectObject) {
 			var value = selectObject.value;
 			paisSeleccionado = value;
