@@ -39,18 +39,18 @@
 		</section>
 	</div>
 
-	<div style="text-align: center; position:relative; top:40px;">
+	<div style="text-align: center; position:relative; top:20px;">
 		<a th:href="@{/Reportes}" class="nes-btn is-success">reportes</a>
 	</div>
 
 	<div class="container">
-		<div style="position: relative;top:50px;left: 26%;">
+		<div style="position: relative;left: 26%;">
 			<i class="nes-charmander" style="position: relative;top:20px"></i>
 			<a type="button" class="nes-btn is-warning" th:href="@{/agregar}">Agregar Persona</a>
 			<i class="nes-mario" style="position: relative;top:20px"></i>
 		</div>
 
-		<div style="position: relative;top:50px;width:1200px;top:50px;height: 90%;font-size: 8px;text-align: center;">
+		<div style="position: relative; right:50px;width:1200px; font-size:8px; text-align:center;">
 			<div >
 				<table class="nes-table is-bordered is-centered">
 					<thead>
@@ -87,7 +87,7 @@
 					</tbody>
 				</table>
 				<br><br>
-				<div style="text-align: center;position: relative;left: 27%;">
+				<div style="text-align: center;position: relative;left: 24%;bottom:22px">
 					<div th:if="${totalPages > 1}" style="color:white">
 						<div class="row">
 
@@ -95,7 +95,7 @@
 								<a th:if="${currentPage > 1}" th:href="@{'/page/' + ${currentPage - 1}}">Anterior</a>
 								<span th:unless="${currentPage > 1}">Anterior</span>
 							</div>
-							<div class="col-sm-2" style="font-size: 14px;text-align: center;">
+							<div class="col-sm-2" style="font-size: 14px;text-align: center;font-family:ner">
 								[[${currentPage}]]/[[${totalPages}]]
 							</div>
 
