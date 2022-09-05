@@ -71,7 +71,7 @@
 				<div class="nes-select is-warning">
 					<select id="customerNameList" name="customer" onchange="getComboA(this)">
 						<option id="primerPais" disabled selected hidden>Select...</option>
-						<option th:each="pais : ${paises}" th:value="${pais.id}" th:text="${pais.nombre}" id="pais">
+						<option th:each="pais : ${paises}" th:value="${pais?.id}" th:text="${pais?.nombre}" id="pais">
 						</option>
 					</select>
 				</div>
@@ -85,8 +85,8 @@
 				<label for="warning_select" style="color: white;">Localidad</label>
 				<div class="nes-select is-warning">
 					<select id="customerNameListLocalidad" name="customerrr" onchange="getLocalidad(this)">
-						<option th:value="*{persona.domicilio.localidad.id}"
-							th:text="*{persona.domicilio.localidad.nombre}" disabled id="localidad" selected hidden>
+						<option th:value="*{persona.domicilio?.localidad?.id}"
+							th:text="*{persona?.domicilio?.localidad?.nombre}" disabled id="localidad" selected hidden>
 							Select...</option>
 
 					</select>
@@ -100,8 +100,8 @@
 					<select required id="warning_select" onchange="getTecnologia(this)">
 						<option th:value="*{persona?.tecnologia?.id}" th:text="*{persona?.tecnologia?.nombre}" disabled
 							selected hidden>Select...</option>
-						<option th:each="tecnologia : ${tecnologias}" th:value="${tecnologia.id}"
-							th:text="${tecnologia.nombre}" id="tecnologia">To be</option>
+						<option th:each="tecnologia : ${tecnologias}" th:value="${tecnologia?.id}"
+							th:text="${tecnologia?.nombre}" id="tecnologia">To be</option>
 					</select>
 				</div>
 				<label for="warning_select" style="color: white;">Signo Zodiacal</label>
@@ -109,7 +109,7 @@
 					<select required id="warning_select" onchange="getSigno(this)">
 						<option th:value="*{persona?.signoZodiaco?.id}" th:text="*{persona?.signoZodiaco?.nombre}"
 							disabled selected hidden>Select...</option>
-						<option th:each="signo : ${signos}" th:value="${signo.id}" th:text="${signo.nombre}" id="signo">
+						<option th:each="signo : ${signos}" th:value="${signo?.id}" th:text="${signo?.nombre}" id="signo">
 							To be</option>
 					</select>
 				</div>
@@ -147,14 +147,15 @@
 				elemento = text;
 
 				myArr = JSON.parse(text);
+				
+				if(myArr != null && myArr.nombre.length > 0){
+					prov = {id: myArr.id, nombre: myArr.nombre};
 
-				prov = {id: myArr.id, nombre: myArr.nombre};
-
-				var provinciaDefinida = document.getElementById("primerProvincia");
-				provinciaDefinida.value = prov.id;
-				provinciaDefinida.text = prov.nombre;
-
-
+					var provinciaDefinida = document.getElementById("primerProvincia");
+					provinciaDefinida.value = prov.id;
+					provinciaDefinida.text = prov.nombre;
+				}
+				
 
 
 				request = new Request('http://localhost:8080/api/paises/' + prov.id);
@@ -164,12 +165,14 @@
 					elemento = text;
 
 					myArr = JSON.parse(text);
-					paisObt = {id: myArr.id, nombre: myArr.nombre};
+					
+					if(myArr != null && myArr.nombre.length > 0){
+						paisObt = {id: myArr.id, nombre: myArr.nombre};
 
-					var PaisDefinido = document.getElementById("primerPais");
-					PaisDefinido.value = paisObt.id;
-					PaisDefinido.text = paisObt.nombre;
-
+						var PaisDefinido = document.getElementById("primerPais");
+						PaisDefinido.value = paisObt.id;
+						PaisDefinido.text = paisObt.nombre;
+					}
 
 
 				}
