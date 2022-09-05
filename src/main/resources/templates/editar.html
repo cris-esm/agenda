@@ -139,7 +139,7 @@
 			var prov;
 			var paisObt;
 
-			var request = new Request('http://localhost:8080/api/Provincias/getByLocalidad/' + LocalidadToProvincia);
+			var request = new Request('https://agenda-production.up.railway.app/api/Provincias/getByLocalidad/' + LocalidadToProvincia);
 
 			fetch(request).then(function (response) {
 				return response.text();
@@ -157,7 +157,7 @@
 
 
 
-				request = new Request('http://localhost:8080/api/paises/' + prov.id);
+				request = new Request('https://agenda-production.up.railway.app/api/paises/' + prov.id);
 				fetch(request).then(function (response) {
 					return response.text();
 				}).then(function (text) {
@@ -246,7 +246,7 @@
 				console.log(person);
 				console.log(localidad);
 
-				fetch('http://localhost:8080/api/Persona/update', {
+				fetch('https://agenda-production.up.railway.app/api/Persona/update', {
 					method: 'POST',
 					headers: {
 						'Accept': 'application/json, text/plain, */*',
@@ -289,7 +289,7 @@
 					text: ''
 				}));
 
-				var request = new Request('http://localhost:8080/api/Provincias/' + value);
+				var request = new Request('https://agenda-production.up.railway.app/api/Provincias/' + value);
 
 				fetch(request).then(function (response) {
 					return response.text();
@@ -331,7 +331,7 @@
 					text: ''
 				}));
 
-				var request = new Request('http://localhost:8080/api/Localidades/' + value);
+				var request = new Request('https://agenda-production.up.railway.app/api/Localidades/' + value);
 
 				console.log(request);
 
