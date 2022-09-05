@@ -10,6 +10,7 @@ import com.ungs.agenda.dto.LocalidadDTO;
 import com.ungs.agenda.dto.PaisDTO;
 import com.ungs.agenda.dto.ProvinciaDTO;
 import com.ungs.agenda.mapper.ModelMapper;
+import com.ungs.agenda.model.Pais;
 import com.ungs.agenda.model.Provincia;
 import com.ungs.agenda.repository.ProvinciaRepository;
 import com.ungs.agenda.service.IProvinciaService;
@@ -44,5 +45,14 @@ public class ProvinciaServiceImpl implements IProvinciaService {
 	public PaisDTO getPaisByProvincia(Long id) {
 		Optional<Provincia> provincia = provinciaRepo.findById(id);
 		return provincia.isPresent() ? mapper.toPaisDTO(provincia.get().getPais()) : null;
+	}
+
+	@Override
+	public void save(ProvinciaDTO provincia, PaisDTO pais) {
+		Provincia provinciaDb = mapper.toProvincia(provincia);
+		Pais paisDb = mapper.toPais(pais);
+		provinciaDb.setPais(paisDb);
+		provinciaRepo.save(provinciaDb);		
+		
 	}
 }

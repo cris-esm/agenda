@@ -10,6 +10,8 @@ import com.ungs.agenda.dto.PaisDTO;
 import com.ungs.agenda.dto.ProvinciaDTO;
 import com.ungs.agenda.mapper.ModelMapper;
 import com.ungs.agenda.model.Pais;
+import com.ungs.agenda.model.Persona;
+import com.ungs.agenda.model.Provincia;
 import com.ungs.agenda.repository.PaisRepository;
 import com.ungs.agenda.service.IPaisService;
 
@@ -37,5 +39,16 @@ public class PaisServiceImpl implements IPaisService {
 		}
 		return null;
 	}
-	
+
+	@Override
+	public void addPais(PaisDTO pais) {
+		Pais paisDb = mapper.toPais(pais);
+		paisRepo.save(paisDb);
+	}
+
+	@Override
+	public PaisDTO getPaisById(Long id) {
+		// TODO Auto-generated method stub
+		Optional<Pais> pais = paisRepo.findById(id);
+		return pais.isPresent() ? mapper.toPaisDTO(pais.get()) : null;	}
 }

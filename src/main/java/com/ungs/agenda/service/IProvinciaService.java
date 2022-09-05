@@ -14,4 +14,6 @@ public interface IProvinciaService {
 	public List<LocalidadDTO> getLocalidades(Long id);
 	
 	public PaisDTO getPaisByProvincia(Long id);
+	
+	public void save(ProvinciaDTO provincia, PaisDTO pais);
 }
