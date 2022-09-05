@@ -45,7 +45,7 @@
 
 	<script>
 	
-	var request = new Request('http://localhost:8080/report/ventas/download?tipo=PDF');
+	var request = new Request('https://agenda-production.up.railway.app/report/ventas/download?tipo=PDF');
 
 			fetch(request).then(function (response) {
 				return response.text();
@@ -75,7 +75,7 @@
 			});
 
 
-			var request = new Request('http://localhost:8080/api/Provincias/' + value);
+			var request = new Request('https://agenda-production.up.railway.app/api/Provincias/' + value);
 
 			fetch(request).then(function (response) {
 				return response.text();
@@ -101,7 +101,7 @@
 			});
 
 
-			var request = new Request('http://localhost:8080/api/Localidades/' + value);
+			var request = new Request('https://agenda-production.up.railway.app/api/Localidades/' + value);
 
 			fetch(request).then(function (response) {
 				return response.text();
@@ -120,7 +120,7 @@
 		
 		$(document).ready(function () {
 
-			var request = new Request('http://localhost:8080/api/paises');
+			var request = new Request('https://agenda-production.up.railway.app/api/paises');
 
 
 			fetch(request).then(function (response) {
