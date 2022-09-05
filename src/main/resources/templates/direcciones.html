@@ -92,6 +92,9 @@
 				</div>
 			</div>
 		</div>
+		<div style="position:relative;left: 35%;">
+					<a class="btn btn-primary" th:href="@{/agregar}" style="position: relative;top:-310px;">Volver</a>
+				</div>
 	</body>
 
 	<script>
@@ -134,7 +137,7 @@
 
 				let pais = {nombre: paisNuevo};
 
-				fetch('http://localhost:8080/api/paises/save', {
+				fetch('https://agenda-production.up.railway.app/api/paises/save', {
 					method: 'POST',
 					headers: {
 						'Accept': 'application/json, text/plain, */*',
@@ -156,7 +159,7 @@
 				let provincia = {nombre: provinciaNueva};
 				console.log(paisProvincia);
 
-				fetch('http://localhost:8080/api/Provincias/save/' + paisProvincia, {
+				fetch('https://agenda-production.up.railway.app/api/Provincias/save/' + paisProvincia, {
 					method: 'POST',
 					headers: {
 						'Accept': 'application/json, text/plain, */*',
@@ -178,7 +181,7 @@
 				let localidad = {nombre: localidadNueva};
 				console.log(provinciaSeleccionada);
 
-				fetch('http://localhost:8080/api/Localidades/save/' + provinciaSeleccionada, {
+				fetch('https://agenda-production.up.railway.app/api/Localidades/save/' + provinciaSeleccionada, {
 					method: 'POST',
 					headers: {
 						'Accept': 'application/json, text/plain, */*',
@@ -213,7 +216,7 @@
 			}));
 
 
-			var request = new Request('http://localhost:8080/api/Provincias/' + value);
+			var request = new Request('https://agenda-production.up.railway.app/api/Provincias/' + value);
 
 			fetch(request).then(function (response) {
 				return response.text();
@@ -250,7 +253,7 @@
 				text: ''
 			}));
 
-			var request = new Request('http://localhost:8080/api/Localidades/' + value);
+			var request = new Request('https://agenda-production.up.railway.app/api/Localidades/' + value);
 
 			console.log(request);
 

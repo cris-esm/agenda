@@ -191,7 +191,7 @@
 
 				console.log(person);
 
-				fetch('http://localhost:8080/api/Persona/save', {
+				fetch('https://agenda-production.up.railway.app/api/Persona/save', {
 					method: 'POST',
 					headers: {
 						'Accept': 'application/json, text/plain, */*',
@@ -227,7 +227,7 @@
 				}));
 
 
-				var request = new Request('http://localhost:8080/api/Provincias/' + value);
+				var request = new Request('https://agenda-production.up.railway.app/api/Provincias/' + value);
 
 				fetch(request).then(function (response) {
 					return response.text();
@@ -264,7 +264,7 @@
 					text: ''
 				}));
 
-				var request = new Request('http://localhost:8080/api/Localidades/' + value);
+				var request = new Request('https://agenda-production.up.railway.app/api/Localidades/' + value);
 
 				console.log(request);
 
