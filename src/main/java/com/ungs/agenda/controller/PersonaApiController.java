@@ -63,12 +63,6 @@ public class PersonaApiController {
 
 		}
 
-		/*
-		 * if (persona.getSignoZodiaco().getId() == null) persona.setSignoZodiaco(null);
-		 * if (persona.getTipoContacto().getId() == null) persona.setTipoContacto(null);
-		 * if (persona.getTecnologia().getId() == null) persona.setTecnologia(null); if
-		 * (persona.getDomicilio().getLocalidad().getId() == null)
-		 */
 		return "/agregar";
 	}
 
@@ -99,47 +93,10 @@ public class PersonaApiController {
 		}
 
 	@PostMapping("/update")
-	public String updatePersona(@RequestBody PersonaDTO persona) {
+	public void updatePersona(@RequestBody PersonaDTO persona) {
 		
-		Boolean mailValido = persona.getEmail() != null && persona.getEmail().length() > 0
-				? mailValido(persona.getEmail())
-				: false;
-
-		Boolean telefonoValido = persona.getTelefono() != null && persona.getTelefono().length() >= 8
-				? telefonoValido(persona.getTelefono())
-				: false;
-
-		Boolean nombreValido = persona.getNombre() != null && persona.getNombre().length() > 2 ?
-				true : false ;
-		
-		Boolean alturaValida = persona.getDomicilio().getAltura() != null && persona.getDomicilio().getAltura() > 0 ?
-				isNumeric(persona.getDomicilio().getAltura().toString()) : false ;
-		
-		List<PersonaDTO> personas = personaService.getAll();
-		Boolean existe = false;
-		existe = personas.contains(persona);
-		if (nombreValido && mailValido && telefonoValido) {
-			for (PersonaDTO person : personas) {
-				if(person.getEmail().equals(persona.getEmail()) ||
-					person.getTelefono().toString().equals(persona.getTelefono().toString())) {
-					existe = true;
-				}
-			}
-		}
-
-		if (nombreValido && telefonoValido && !existe
-				&& mailValido && persona.getDomicilio() != null && persona.getDomicilio().getCalle() != null && 
-				alturaValida && persona.getDomicilio().getCalle().length() > 3 && persona.getDomicilio().
-				getAltura() != null && persona.getDomicilio().getLocalidad() != null && persona.getFechaNac() != null &&
-				persona.getSignoZodiaco() != null && persona.getTecnologia() != null 
-				&& persona.getTipoContacto() != null && persona.getDomicilio().getPiso() != null &&
-				persona.getDomicilio().getPiso().length() > 0 && persona.getDomicilio().getAltura() > 0) {
-
 			personaService.saveOrUpdate(persona);
-			return "redirect:/";
 
-		}
-		return "/editar/" + persona.getId() ;
 	}
 
 
