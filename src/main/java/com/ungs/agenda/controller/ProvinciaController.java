@@ -44,8 +44,7 @@ public class ProvinciaController {
 	
 	@PostMapping("/save/{id}")
 	public void saveProvincia(@RequestBody ProvinciaDTO provincia, @PathVariable(value = "id")  String id) {
-		if (provincia == null || provincia.getNombre() == null || provincia.getNombre().isEmpty() && 
-				provincia.getNombre().length() < 3) {return;}
+		if (provincia == null || provincia.getNombre() == null || provincia.getNombre().isEmpty()) {return;}
 		long idLong = Long.parseLong(id);
 		List<ProvinciaDTO> provincias = paisService.getProvincias(idLong);
 		boolean pertenece = false;

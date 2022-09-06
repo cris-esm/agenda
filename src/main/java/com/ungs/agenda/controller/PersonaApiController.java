@@ -1,5 +1,7 @@
 package com.ungs.agenda.controller;
 
+
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,21 +12,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ungs.agenda.dto.PersonaDTO;
 import com.ungs.agenda.service.IPersonaService;
-import java.util.regex.*;
-import java.util.*;
 
 @RestController
 @RequestMapping("/api/Persona")
 public class PersonaApiController {
-
+	
 	@Autowired
 	private IPersonaService personaService;
 
-	@PostMapping("/save")
-	public void savePersona(@RequestBody PersonaDTO persona) {
-		Boolean mailValido = persona.getEmail() != null && persona.getEmail().length() > 0
-				? mailValido(persona.getEmail())
-				: false;
+	 @PostMapping("/save")
+	 public void savePersona(@RequestBody PersonaDTO persona) {
+		 
+		 Boolean mailValido = persona.getEmail() != null && persona.getEmail().length() > 0
+					? mailValido(persona.getEmail())
+					: false;
 
 		Boolean telefonoValido = persona.getTelefono() != null && persona.getTelefono().length() >= 8
 				? telefonoValido(persona.getTelefono())
@@ -112,5 +113,6 @@ public class PersonaApiController {
 
 		}
 	}
+
 
 }

@@ -40,8 +40,7 @@ public class PaisController {
 
 	@PostMapping("/save")
 	public void savePais(@RequestBody PaisDTO pais) {
-		if (pais == null || pais.getNombre() == null || pais.getNombre().isEmpty() 
-				&& pais.getNombre().length() < 3) {return;}
+		if (pais == null || pais.getNombre() == null || pais.getNombre().isEmpty()) {return;}
 		List<PaisDTO> paises = paisService.getAll();
 		boolean pertenece = false;
 		for (PaisDTO elementoPais : paises) {
