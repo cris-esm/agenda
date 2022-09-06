@@ -26,15 +26,18 @@ public class PersonaApiController {
 				? mailValido(persona.getEmail())
 				: false;
 
-		Boolean telefonoValido = persona.getTelefono() != null && persona.getTelefono().length() > 0
-				? telefonoValido(persona.getTelefono())
+		Boolean telefonoValido = persona.getTelefono() != null && persona.getTelefono().length() >= 8
+				? isNumeric(persona.getTelefono())
 				: false;
 
 		Boolean nombreValido = persona.getNombre() != null && persona.getNombre().length() > 2 ?
-				isFullname(persona.getNombre()) : false ;
+				true : false ;
+		
+		Boolean alturaValida = persona.getDomicilio().getAltura() != null && persona.getDomicilio().getAltura() > 0 ?
+				isNumeric(persona.getDomicilio().getAltura().toString()) : false ;
 		
 		if (nombreValido && telefonoValido && mailValido && persona.getDomicilio() != null && 
-				persona.getDomicilio().getCalle() != null && 
+				persona.getDomicilio().getCalle() != null && alturaValida &&
 				persona.getDomicilio().getCalle().length() > 3 && persona.getDomicilio().getAltura() != null &&
 				persona.getDomicilio().getLocalidad() != null && persona.getFechaNac() != null &&
 				persona.getSignoZodiaco() != null && persona.getTecnologia() != null 
@@ -71,6 +74,15 @@ public class PersonaApiController {
 	    String expression = "^[a-zA-Z\\s]+"; 
 	    return str.matches(expression);        
 	}
+	
+	public static boolean isNumeric(String str) { 
+		  try {  
+		    Double.parseDouble(str);  
+		    return true;
+		  } catch(NumberFormatException e){  
+		    return false;  
+		  }  
+		}
 
 	@PostMapping("/update")
 	public void updatePersona(@RequestBody PersonaDTO persona) {
@@ -78,17 +90,21 @@ public class PersonaApiController {
 		Boolean mailValido = persona.getEmail() != null && persona.getEmail().length() > 0
 				? mailValido(persona.getEmail())
 				: false;
-		Boolean nombreValido = persona.getNombre() != null && persona.getNombre().length() > 2 ?
-				isFullname(persona.getNombre()) : false ;
 
-		Boolean telefonoValido = persona.getTelefono() != null && persona.getTelefono().length() > 0
-				? telefonoValido(persona.getTelefono())
+		Boolean telefonoValido = persona.getTelefono() != null && persona.getTelefono().length() >= 8
+				? isNumeric(persona.getTelefono())
 				: false;
+
+		Boolean nombreValido = persona.getNombre() != null && persona.getNombre().length() > 2 ?
+				true : false ;
+		
+		Boolean alturaValida = persona.getDomicilio().getAltura() != null && persona.getDomicilio().getAltura() > 0 ?
+				isNumeric(persona.getDomicilio().getAltura().toString()) : false ;
 
 		if (nombreValido && telefonoValido 
 				&& mailValido && persona.getDomicilio() != null && persona.getDomicilio().getCalle() != null && 
-				persona.getDomicilio().getCalle().length() > 3 && persona.getDomicilio().getAltura() != null &&
-				persona.getDomicilio().getLocalidad() != null && persona.getFechaNac() != null &&
+				alturaValida && persona.getDomicilio().getCalle().length() > 3 && persona.getDomicilio().
+				getAltura() != null && persona.getDomicilio().getLocalidad() != null && persona.getFechaNac() != null &&
 				persona.getSignoZodiaco() != null && persona.getTecnologia() != null 
 				&& persona.getTipoContacto() != null && persona.getDomicilio().getPiso() != null &&
 				persona.getDomicilio().getPiso().length() > 0 && persona.getDomicilio().getAltura() > 0) {
