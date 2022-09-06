@@ -27,7 +27,7 @@ public class PersonaApiController {
 				: false;
 
 		Boolean telefonoValido = persona.getTelefono() != null && persona.getTelefono().length() >= 8
-				? isNumeric(persona.getTelefono())
+				? telefonoValido(persona.getTelefono())
 				: false;
 
 		Boolean nombreValido = persona.getNombre() != null && persona.getNombre().length() > 2 ?
@@ -65,9 +65,8 @@ public class PersonaApiController {
 	}
 
 	public Boolean telefonoValido(String telefono) {
-		Pattern pattern = Pattern.compile("^\\d{10}$");
-		Matcher matcher = pattern.matcher(telefono);
-		return matcher.matches();
+		String expression = "^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{2,8}$"; 
+	    return telefono.matches(expression);     
 	}
 	
 	public static boolean isFullname(String str) {
@@ -92,7 +91,7 @@ public class PersonaApiController {
 				: false;
 
 		Boolean telefonoValido = persona.getTelefono() != null && persona.getTelefono().length() >= 8
-				? isNumeric(persona.getTelefono())
+				? telefonoValido(persona.getTelefono())
 				: false;
 
 		Boolean nombreValido = persona.getNombre() != null && persona.getNombre().length() > 2 ?
