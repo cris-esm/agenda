@@ -1,7 +1,6 @@
 package com.ungs.agenda.controller;
 
 
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,7 +21,7 @@ public class PersonaApiController {
 	private IPersonaService personaService;
 
 	 @PostMapping("/save")
-	 public String savePersona(@RequestBody PersonaDTO persona) {
+	 public void savePersona(@RequestBody PersonaDTO persona) {
 		 
 		 Boolean mailValido = persona.getEmail() != null && persona.getEmail().length() > 0
 					? mailValido(persona.getEmail())
@@ -38,19 +37,7 @@ public class PersonaApiController {
 		Boolean alturaValida = persona.getDomicilio().getAltura() != null && persona.getDomicilio().getAltura() > 0 ?
 				isNumeric(persona.getDomicilio().getAltura().toString()) : false ;
 		
-		List<PersonaDTO> personas = personaService.getAll();
-		Boolean existe = false;
-		existe = personas.contains(persona);
-		if (nombreValido && mailValido && telefonoValido) {
-			for (PersonaDTO person : personas) {
-				if(person.getEmail().equals(persona.getEmail()) ||
-					person.getTelefono().toString().equals(persona.getTelefono().toString())) {
-					existe = true;
-				}
-			}
-		}
-		
-		if (nombreValido && telefonoValido && mailValido && persona.getDomicilio() != null && !existe &&
+		if (nombreValido && telefonoValido && mailValido && persona.getDomicilio() != null && 
 				persona.getDomicilio().getCalle() != null && alturaValida &&
 				persona.getDomicilio().getCalle().length() > 3 && persona.getDomicilio().getAltura() != null &&
 				persona.getDomicilio().getLocalidad() != null && persona.getFechaNac() != null &&
@@ -59,7 +46,6 @@ public class PersonaApiController {
 				persona.getDomicilio().getPiso().length() > 0 && persona.getDomicilio().getAltura() > 0) {
 
 			personaService.saveOrUpdate(persona);
-			return "redirect:/";
 
 		}
 
@@ -69,7 +55,7 @@ public class PersonaApiController {
 		 * if (persona.getTecnologia().getId() == null) persona.setTecnologia(null); if
 		 * (persona.getDomicilio().getLocalidad().getId() == null)
 		 */
-		return "/agregar";
+
 	}
 
 	public Boolean mailValido(String email) {
@@ -99,8 +85,8 @@ public class PersonaApiController {
 		}
 
 	@PostMapping("/update")
-	public String updatePersona(@RequestBody PersonaDTO persona) {
-		
+	public void updatePersona(@RequestBody PersonaDTO persona) {
+
 		Boolean mailValido = persona.getEmail() != null && persona.getEmail().length() > 0
 				? mailValido(persona.getEmail())
 				: false;
@@ -114,20 +100,8 @@ public class PersonaApiController {
 		
 		Boolean alturaValida = persona.getDomicilio().getAltura() != null && persona.getDomicilio().getAltura() > 0 ?
 				isNumeric(persona.getDomicilio().getAltura().toString()) : false ;
-		
-		List<PersonaDTO> personas = personaService.getAll();
-		Boolean existe = false;
-		existe = personas.contains(persona);
-		if (nombreValido && mailValido && telefonoValido) {
-			for (PersonaDTO person : personas) {
-				if(person.getEmail().equals(persona.getEmail()) ||
-					person.getTelefono().toString().equals(persona.getTelefono().toString())) {
-					existe = true;
-				}
-			}
-		}
 
-		if (nombreValido && telefonoValido && !existe
+		if (nombreValido && telefonoValido 
 				&& mailValido && persona.getDomicilio() != null && persona.getDomicilio().getCalle() != null && 
 				alturaValida && persona.getDomicilio().getCalle().length() > 3 && persona.getDomicilio().
 				getAltura() != null && persona.getDomicilio().getLocalidad() != null && persona.getFechaNac() != null &&
@@ -136,10 +110,8 @@ public class PersonaApiController {
 				persona.getDomicilio().getPiso().length() > 0 && persona.getDomicilio().getAltura() > 0) {
 
 			personaService.saveOrUpdate(persona);
-			return "redirect:/";
 
 		}
-		return "/editar/" + persona.getId() ;
 	}
 
 

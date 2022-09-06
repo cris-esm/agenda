@@ -113,7 +113,7 @@ public class PersonaController {
 	
 	@GetMapping("/page/{pageNumber}")
 	public String getPaginated(@PathVariable (value = "pageNumber") Integer pageNumber, Model model) {
-		Integer pageSize = 3;
+		Integer pageSize = 4;
 		Page<PersonaDTO> pagina = personaService.getPaginated(pageNumber, pageSize);
 		List<PersonaDTO> listaPersonasDTO = pagina.getContent();
 		model.addAttribute("currentPage", pageNumber);
