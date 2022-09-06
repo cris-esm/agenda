@@ -49,7 +49,7 @@ public class PersonaApiController {
 
 		}
 
-		return "/agregar";
+		
 	}
 
 	public Boolean mailValido(String email) {
